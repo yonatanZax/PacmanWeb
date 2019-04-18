@@ -8,6 +8,7 @@
     <!--    Js scripts      -->
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="GameLogic.js" ></script>
+    <script type="text/javascript" src="SwitchContent.js" ></script>
 
 
 <!--        css files-->
@@ -28,14 +29,40 @@
 </header>
 
 
+<button type="button" onclick="showWelcome()">Welcome</button><br>
+<button type="button" onclick="showAbout()">About</button><br>
+<button type="button" onclick="playGame()">Play</button><br>
 
-SCORE:
-<input id="lblScore" type="text"/>
-<br/>
-TIME:
-<input id="lblTime" type="text"/>
-<br/>
-<canvas id="canvas" height="600" width="600"></canvas>
+
+<div id="welcome" class="visible">
+    <br>
+    Welcome div
+    <br>
+
+</div>
+
+
+<div id="about" class="hidden">
+    <br>
+    About div
+    <br>
+</div>
+
+
+<div id="game" class="hidden">
+    <br>
+
+    SCORE:
+    <input id="lblScore" type="text"/>
+    <br/>
+    TIME:
+    <input id="lblTime" type="text"/>
+    <br/>
+    <canvas id="canvas" height="600" width="600"></canvas>
+
+
+</div>
+
 
 
 
@@ -50,6 +77,11 @@ TIME:
 
 
 <script>
+
+
+    function showWelcome() { switchContent("welcome")  }
+    function showAbout() { switchContent("about")  }
+    function playGame() { switchContent("game")  }
 
 
     var context = canvas.getContext("2d");
