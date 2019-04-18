@@ -5,13 +5,27 @@
     <title>Title</title>
 
 
-<!--    Js scripts      -->
+    <!--    Js scripts      -->
+    <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="GameLogic.js" ></script>
+
+
+<!--        css files-->
+    <link rel="stylesheet" type="text/css" href="mainStyleSheet.css">
+
+
 </head>
 
 
 
-<body onload="Start()">
+<body>
+
+
+
+
+<header>
+    <h2>This is the header</h2>
+</header>
 
 
 
@@ -26,5 +40,34 @@ TIME:
 
 
 
+
+
+<footer>
+    <p>Footer</p>
+</footer>
+
+
+
+
+<script>
+
+
+    var context = canvas.getContext("2d");
+    var shape = new Object();
+    var board;
+    var score;
+    var pac_color;
+    var start_time;
+    var time_elapsed;
+    var interval;
+
+
+    Start();
+
+
+</script>
+
 </body>
+
+
 </html>
