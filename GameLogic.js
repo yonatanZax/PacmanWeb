@@ -1,23 +1,4 @@
-window.addEventListener( "load", initiateVars, false );
-var context;
-var shape;
-var board;
-var score;
-var pac_color;
-var start_time;
-var time_elapsed;
-var interval;
-function initiateVars() {
-    var context = canvas.getContext("2d");
-    var shape = {i:0,j:0};
-    var board;
-    var score;
-    var pac_color;
-    var start_time;
-    var time_elapsed;
-    var interval;
-    Start();
-}
+
 
 
 function Start() {
