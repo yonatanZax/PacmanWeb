@@ -25,7 +25,7 @@ function manageRegister(myForm) {
 
     console.log("manageRegister");
 
-    var newUserRegistration = new User({userName:myForm.userName,password:myForm.password,
+    var newUserRegistration = new User({userName:myForm.userName, password:myForm.password,
                                             fName:myForm.fname, lName:myForm.lName,
                                             email:myForm.email, birthday:myForm.birthday
     });
