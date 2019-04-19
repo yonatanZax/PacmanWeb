@@ -36,8 +36,9 @@
 
     <div class="toolbar" >
         <button  onclick="showWelcome()">Welcome</button>
-        <button  onclick="showAbout()">About</button>
-        <button  onclick="playGame()">Play</button>
+        <button onclick="document.getElementById('aboutModal').style.display='block'" style="width:auto;">About</button>
+<!--        <button  onclick="showAbout()">About</button>-->
+        <button  onclick="playGame()">EndGame</button>
     </div>
 
 
@@ -48,9 +49,9 @@
 
 
 
+<!--/****   Welcome - login and registration    ****/-->
 
-
-<div id="welcome" class="visible">
+<div id="welcome" class="visible frame">
     <br>
 
     <img src="images/Marvel-Pacman%20logo.png" class="center">
@@ -74,10 +75,10 @@
 
             <div class="container">
                 <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input class="loginInput" type="text" placeholder="Enter Username" name="uname" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input class="loginInput" type="password" placeholder="Enter Password" name="psw" required>
 
 
 
@@ -103,13 +104,13 @@
                 <p>Please fill in this form to create an account.</p>
                 <hr>
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" required>
+                <input class="loginInput" type="text" placeholder="Enter Email" name="email" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input class="loginInput" type="password" placeholder="Enter Password" name="psw" required>
 
                 <label for="psw-repeat"><b>Repeat Password</b></label>
-                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <input class="loginInput" type="password" placeholder="Repeat Password" name="psw-repeat" required>
 
                 <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
@@ -118,7 +119,7 @@
                 <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
                 <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
                     <button type="submit" class="submitBtn">Sign Up</button>
                 </div>
             </div>
@@ -128,23 +129,43 @@
 </div>
 
 
-<div id="about" class="hidden">
-    <br>
-    About div
-    <br>
-</div>
 
+
+<!--/****   About    ****/-->
+
+
+    <div id="aboutModal" class="modal">
+        <span onclick="document.getElementById('aboutModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <h1>About</h1>
+                <p>about about about...</p>
+                <hr>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+<!--/****   EndGame    ****/-->
 
 <div id="game" class="hidden">
     <br>
 
     SCORE:
-    <input id="lblScore" type="text"/>
-    <br/>
+    <input class="gameInput" id="lblScore" type="text"/>
+
     TIME:
-    <input id="lblTime" type="text"/>
-    <br/>
-    <canvas id="canvas" height="600" width="600"></canvas>
+    <input class="gameInput" id="lblTime" type="text"/>
+
+    LIVES:
+    <input class="gameInput" id="lives" type="text"/>
+
+    <br><br>
+    <canvas id="canvas" class="center" height="600" width="600"></canvas>
+    <br><br>
 
 
 </div>
@@ -166,7 +187,6 @@
 
 
     function showWelcome() { switchContent("welcome")  }
-    function showAbout() { switchContent("about")  }
     function playGame() { switchContent("game")  }
 
 

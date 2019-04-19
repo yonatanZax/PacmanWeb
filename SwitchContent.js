@@ -2,7 +2,7 @@
 
 function switchContent(makeVisible) {
 
-    var contentList = ["welcome","about","game"];
+    var contentList = ["welcome","game"];
 
     var makeHidden = contentList.filter(function (value) {
         return value!=makeVisible;
