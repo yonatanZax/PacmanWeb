@@ -2,10 +2,14 @@
 
 
 
-function manageLogin(myForm) {
+function manageLogin() {
     console.log("ManageLogin");
-    var uName = myForm.userName;
-    var pass = myForm.password;
+
+    var footer = document.getElementById("footer");
+    footer.innerHTML = "Manage_login";
+
+    var uName = $('#userName_login').val();
+    var pass = $('#password_login').val();
 
     var checkUserFromForm = new User({userName:uName,password:pass});
 
@@ -13,9 +17,9 @@ function manageLogin(myForm) {
 
     if(check){
         session = checkUserFromForm;
-        console.log("ManageLogin - valid user");
+        footer.innerHTML = "ManageLogin - valid user";
     }else{
-        console.log("Incorrect values");
+        footer.innerHTML = "Incorrect values";
 
     }
 
@@ -24,6 +28,8 @@ function manageLogin(myForm) {
 function manageRegister(myForm) {
 
     console.log("manageRegister");
+    var myForm = document.getElementById("registerForm");
+
 
     var newUserRegistration = new User({userName:myForm.userName,password:myForm.password,
                                             fName:myForm.fname, lName:myForm.lName,
@@ -36,7 +42,7 @@ function manageRegister(myForm) {
 
 function checkUser(userTocheck) {
 
-    var userFromDB = user_db[userTocheck.userName];
+    var userFromDB = single.user_db[userTocheck.userName];
     if (userFromDB != null && userFromDB.password == userTocheck.password)
         return true;
 
