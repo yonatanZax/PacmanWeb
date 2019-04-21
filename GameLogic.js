@@ -1,4 +1,29 @@
 
+
+
+var shape = new Object();
+var board;
+var score;
+var pac_color;
+var start_time;
+var time_elapsed;
+var interval;
+
+// settings variables
+var up_key = 'ArrowUp';
+var down_key = 'ArrowDown';
+var left_key = 'ArrowLeft';
+var right_key = 'ArrowRight';
+var pill_number = 50 + Math.floor(Math.random() * 41); // return a number between 50-90
+var time_seconds = 60;
+var monster_number = 1 + Math.floor(Math.random() * 3); // return a number between 1-3
+
+
+
+
+
+
+
 var EMPTY       = 0;
 var WALL        = 1;
 var PACMAN      = 2;

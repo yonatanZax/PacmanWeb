@@ -59,7 +59,17 @@ body {
 }
 
 
+td{
+    width: 200px;
+}
 
+.inputField{
+    width: 50%;
+    padding: 5%;
+    margin: 5px 10px 10px 20px;
+    display: inline-block;
+
+}
 
 
 

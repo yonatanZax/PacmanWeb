@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>The Greatest Pac-Man game</title>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>The Greatest Pac-Man game</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 
     <!--    Js scripts      -->
-    <script type="text/javascript" src="GameLogic.js" ></script>
-    <script type="text/javascript" src="SwitchContent.js" ></script>
-    <script type="text/javascript" src="UserManager.js" ></script>
+    <script type="text/javascript" src="GameLogic.js"></script>
+    <script type="text/javascript" src="SwitchContent.js"></script>
+    <script type="text/javascript" src="UserManager.js"></script>
+    <script type="text/javascript" src="SettingManager.js"></script>
 
 
-<!--        css files-->
+    <!--        css files-->
     <link rel="stylesheet" type="text/css" href="mainStyleSheet.css">
     <link rel="stylesheet" type="text/css" href="loginSheet.css">
 
@@ -20,33 +21,26 @@
 </head>
 
 
-
-<body onload="Singleton.getInstance()">
-
-
+<body>
 
 
 <header>
 
     <div class="toolbar" style="background-color: black">
-        <img src="images/Marvel-Pacman%20header.png" height="60" >
+        <img src="images/Marvel-Pacman%20header.png" height="60">
     </div>
 
 
-
-
-    <div class="toolbar" >
-        <button  onclick="showWelcome()">Welcome</button>
+    <div class="toolbar">
+        <button onclick="showWelcome()">Welcome</button>
         <button onclick="document.getElementById('aboutModal').style.display='block'" style="width:auto;">About</button>
-<!--        <button  onclick="showAbout()">About</button>-->
-        <button  onclick="setSettings()">Settings</button>
-        <button  onclick="playGame()">EndGame</button>
+        <!--        <button  onclick="showAbout()">About</button>-->
+        <button onclick="setSettings()">Settings</button>
+        <button onclick="playGame()">EndGame</button>
     </div>
 
 
 </header>
-
-
 
 
 
@@ -56,142 +50,257 @@
 <div id="welcome" class="visible frame" style="background-color: yellow">
     <br>
 
-    <img src="images/Marvel-Pacman-logo-bw.png" class="center" >
-<!--    <img src="images/Marvel-Pacman%20logo.png" class="center">-->
+    <img src="images/Marvel-Pacman-logo-bw.png" class="center">
+    <!--    <img src="images/Marvel-Pacman%20logo.png" class="center">-->
 
     <br>
 
 
     <div align="center">
         <button onclick="document.getElementById('loginDiv').style.display='block'" style="width:auto;">Login</button>
-        <button onclick="document.getElementById('registerDiv').style.display='block'" style="width:auto;">Register</button>
+        <button onclick="document.getElementById('registerDiv').style.display='block'" style="width:auto;">Register
+        </button>
     </div>
 
 
-    <div id="loginDiv" class="modal">
+    <div id="loginDiv" class="modal" style="background-color: white">
+         <span onclick="document.getElementById('loginDiv').style.display='none'" class="close">X</span>
 
-        <form id="loginForm" class="modal-content animate">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('loginDiv').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <br><br>
-            </div>
 
             <div class="container">
-                <label for="userName_login"><b>Username</b></label>
-                <input id="userName_login" class="loginInput" type="text" placeholder="Enter Username" name="userName" required>
 
-                <label for="password_login"><b>Password</b></label>
-                <input id="password_login" class="loginInput" type="password" placeholder="Enter Password" name="password" required>
+                <div class="center">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="userName_login"><b>Username</b></label>
+
+                            </td>
+                            <td>
+                                <input id="userName_login" class="loginInput" type="text" placeholder="Enter Username" name="userName">
+                            </td>
+                        </tr>
 
 
+                        <tr>
+                            <td>
+                                <label for="password_login"><b>Password</b></label>
 
-                <button type="button" onclick="document.getElementById('loginDiv').style.display='none'" class="cancelbtn">Cancel</button>
-                <button class="submitBtn" onclick="manageLogin()">Login</button>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
+                            </td>
+                            <td>
+                                <input id="password_login" class="loginInput" type="password" placeholder="Enter Password"
+                                       name="password" required>
+                            </td>
+                        </tr>
 
-                <br>
-                <p id="status_login"> status:</p>
+                    </table>
+
+                    <button type="button" onclick="document.getElementById('loginDiv').style.display='none'"
+                            class="cancelbtn">Cancel
+                    </button>
+<!--                    <button id="loginBtn" class="submitBtn">Login</button>-->
+                    <button id="loginBtn" class="submitBtn" onclick="manageLogin();">Login</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+                </div>
+
+
 
             </div>
-        </form>
+
     </div>
 
 
-
-
-
-
-
-    <div id="registerDiv" class="modal">
+    <div id="registerDiv" class="modal" style="background-color: white">
         <span onclick="document.getElementById('registerDiv').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content animate">
             <div class="container">
                 <h1>Sign Up</h1>
                 <p>Please fill in this form to create an account.</p>
                 <hr>
 
-                <label><b>User name</b></label>
-                <input class="loginInput" type="text" placeholder="Enter username" name="userName" required>
+                <div class="center">
+                <table>
+                    <tr>
+                        <td><label><b>User name</b></label></td>
+                <td><input id="userName_register" class="loginInput" type="text" placeholder="Enter username" name="userName"
+                           pattern=".{8,}"   required title="At least 8 chars for User name"></td>
+                    </tr>
 
-                <label><b>Password</b></label>
-                <input class="loginInput" type="password" placeholder="Enter Password" name="password" required>
+                    <tr>
+                        <td><br><label><b>Password</b></label></td>
+                        <td><input id="password_register" class="loginInput" type="password" placeholder="Enter Password" name="password" required
+                                   pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" title="Must contain at least one number and one letter, and at least 8 or more characters"></td>
+                    </tr>
 
-                <label><b>First name</b></label>
-                <input class="loginInput" type="text" placeholder="Enter first name" name="fName" required>
+                    <tr>
+                        <td><br><label><b>First name</b></label></td>
+                        <td><input id="fName_register" class="loginInput" type="text" placeholder="Enter first name" name="fName" required></td>
+                    </tr>
 
-                <label><b>Last name</b></label>
-                <input class="loginInput" type="text" placeholder="Enter last name" name="lName" required>
+                    <tr>
+                        <td><br><label><b>Last name</b></label></td>
+                        <td><input id="lName_register" class="loginInput" type="text" placeholder="Enter last name" name="lName" required></td>
+                    </tr>
 
-                <label><b>Email</b></label>
-                <input class="loginInput" type="email" placeholder="Enter Email" name="email" required>
+                    <tr>
+                        <td><br><label><b>Email</b></label></td>
+                        <td><input id="email_register" class="loginInput" type="email" placeholder="Enter Email" name="email" required
+                                   pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" title="Must be a valid email"></td>
+                    </tr>
 
-                <label><b>Birthday</b></label>
-                <input class="loginInput" type="date" placeholder="Enter birthday" name="birthday" required>
+                    <tr>
+                        <td><br><label><b>Birthday</b></label></td>
+                        <td><input id="birthday_register" class="loginInput" type="date" placeholder="Enter birthday" name="birthday" required></td>
+                    </tr>
+
+                </table></div>
 
 
-
-
-
-
-                <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
-                <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('registerDiv').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button type="submit" class="submitBtn">Sign Up</button>
+                <div class="center">
+                    <button type="button" onclick="document.getElementById('registerDiv').style.display='none'"
+                            class="cancelbtn">Cancel
+                    </button>
+                    <button id="registerBtn" class="submitBtn">Sign Up</button>
+<!--                    <button id="registerBtn" class="submitBtn" onclick="manageRegister()">Sign Up</button>-->
                 </div>
             </div>
-        </form>
+
     </div>
 
 </div>
-
-
 
 
 <!--/****   About    ****/-->
 
 
-    <div id="aboutModal" class="modal">
-        <span onclick="document.getElementById('aboutModal').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content">
-            <div class="container">
-                <h1>About</h1>
-                <p>about about about...</p>
-                <hr>
-            </div>
-        </form>
-    </div>
-
-
+<div id="aboutModal" class="modal">
+    <span onclick="document.getElementById('aboutModal').style.display='none'" class="close"
+          title="Close Modal">&times;</span>
+    <form class="modal-content">
+        <div class="container">
+            <h1>About</h1>
+            <p>about about about...</p>
+            <hr>
+        </div>
+    </form>
+</div>
 
 
 <!--/****   Settings    ****/-->
 <div id="settings" class="hidden">
-<form>
-    <div class="center">
-        <h1>Settings</h1>
-        <hr>
-
-        <label><b>Number of points</b></label>
-        <input class="loginInput" type="number" name="numOfPoints">
-
-        <label><b>Pacman color</b></label>
-        <select name="Color">
-            <option value="Red">Red</option>
-            <option value="Blue">Blue</option>
-            <option value="Green" selected>Greem</option>
-            <option value="Yellow">Yellow</option>
-        </select>
-
-        <br><br>
+        <div class="center">
+            <h1>Settings</h1>
+            <hr>
 
 
-    </div>
-</form>
+
+            <!--            Keyboard Settings               -->
+
+            <h3>Set game keyboard</h3><br>
+            <div class="center">
+                <label><b>Up key:</b> <pr id="upKeyLabel"></pr></label><br>
+                <input id="settings_upKey" type="text" name="settings_upKey" onkeypress="getKey(event,'up')">
+
+                <br>
+            </div>
+
+            <div style="    margin-left: auto; margin-right: auto; width: 80%;">
+                <label><b>Left key:</b> <pr id="leftKeyLabel"></pr></label>
+                <input id="settings_leftKey" type="text" name="settings_leftKey" onkeypress="getKey(event,'left')">
+
+                <input id="settings_rightKey" type="text" name="settings_rightKey" onkeypress="getKey(event,'right')">
+                <label><b>Right key</b> <pr id="rightKeyLabel"></pr></label>
+
+            </div>
+
+
+            <div class="center">
+
+                <input id="settings_downKey" type="text" name="settings_downKey" onkeypress="getKey(event,'down')">
+                <br><label><b>Down key:</b> <pr id="downKeyLabel"></pr></label>
+
+                <br>
+            </div>
+
+
+
+
+
+
+            <hr>
+
+            <!--            Settings table               -->
+
+            <table>
+
+                <tr>
+                    <td>
+                        <label><b>Number of balls</b></label>
+                    </td>
+
+                    <td>
+                        <input id="settings_numOfBalls" class="inputField" type="number" min="50" max="90" name="settings_numOfBalls">
+                    </td>
+                </tr>
+
+                <!--                new row          -->
+
+                <tr>
+                    <td>
+                        <label><b>Time to play (in sec)</b></label>
+                    </td>
+
+                    <td>
+                        <input id="settings_timeToPlay" class="inputField" type="number" min="60" name="settings_timeToPlay">
+                    </td>
+                </tr>
+
+
+                <!--                new row          -->
+
+                <tr>
+                    <td>
+                        <label><b>Monsters</b></label>
+                    </td>
+
+                    <td>
+                        <input id="settings_numOfMonsters" class="inputField" type="number" min="1" max="3" name="settings_numOfMonsters">
+                    </td>
+                </tr>
+
+
+                <!--                new row          -->
+
+                <tr>
+                    <td>
+                        <label><b>Pacman's color</b></label>
+                    </td>
+
+                    <td>
+                        <select name="Color">
+                            <option value="Red">Red</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Green" selected>Green</option>
+                            <option value="Yellow">Yellow</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+            <br>
+            <div class="center">
+                <button onclick="saveSettings()" style="width: 100%">Save changes</button>
+            </div>
+
+
+        </div>
+
+
 </div>
-
 
 
 <!--/****   EndGame    ****/-->
@@ -216,75 +325,31 @@
 </div>
 
 
-
-
-
-
-
 <footer class="myfooter">
     <p id="footer" style="color: white">Footer</p>
 </footer>
-
-
 
 
 <script>
 
 
 
-
-    class Singleton{
-
-
-        instance = null;
-
-        user_db;
-
-
-        session = null;
-        // var session = aUser;
-
-
-
-
-        context = canvas.getContext("2d");
-        shape = new Object();
-        board;
-        score;
-        pac_color;
-        start_time;
-        time_elapsed;
-        interval;
-
-        // settings variables
-        up_key = 'ArrowUp';
-        down_key = 'ArrowDown';
-        left_key = 'ArrowLeft';
-        right_key = 'ArrowRight';
-        pill_number = 50 + Math.floor(Math.random() * 41); // return a number between 50-90
-        time_seconds = 60;
-        monster_number = 1 + Math.floor(Math.random() * 3); // return a number between 1-3
-
-
-
-        static getInstance() {
-            if(this.instance == null){
-                this.user_db = {};
-                var aUser = new User({userName:"a",password:"a"});
-                this.user_db[aUser.userName] = aUser;
-                this.instance = this;
-                return this.instance;
-            }
-        }
+    function showWelcome() {
+        switchContent("welcome");
     }
 
+    function showLogin() {
+        switchContent("loginDiv");
+        manageLogin();
+        switchContent("welcome");
+    }
 
+    function setSettings() {
+        switchContent("settings");
+    }
 
-
-    function showWelcome() { switchContent("welcome")  }
-    function setSettings() { switchContent("settings")  }
     function playGame() {
-        if (session != null){
+        if (session != null) {
 
             switchContent("game");
             Start();
@@ -292,63 +357,33 @@
     }
 
 
+    var user_db;
+    var session;
+    var context;
 
 
+    window.addEventListener("load",initiateVars,false);
 
-    class User{
-        userName;
-        password;
-        fName;
-        lName;
-        email;
-        birthday;
+    function initiateVars() {
+        // var session = null;
+        user_db = {};
+        var aUser = new User({userName:"a",password:"a"});
+        user_db[aUser.userName] = aUser;
 
-        constructor(values = {}){
-            this.userName = values.userName;
-            this.password = values.password;
-            this.fName = values.fName || "Mark";
-            this.lName = values.lName || "Last";
-            this.email = values.email || "default@gmail.com";
-            this.birthday = values.birthday || 19920101;
-        }
 
-        getName(){
-            return userName;
-        }
-
+        session = aUser;
+        context = canvas.getContext("2d");
     }
 
 
-    var single = Singleton.getInstance();
 
 
-    // var user_db = {};
-    // var aUser = new User({userName:"a",password:"a"});
-    // user_db[aUser.userName] = aUser;
-    //
-    // var session = null;
-    // // var session = aUser;
-    //
-    //
-    //
-    //
-    // var context = canvas.getContext("2d");
-    // var shape = new Object();
-    // var board;
-    // var score;
-    // var pac_color;
-    // var start_time;
-    // var time_elapsed;
-    // var interval;
-    //
-    // // settings variables
-    // var up_key = 'ArrowUp';
-    // var down_key = 'ArrowDown';
-    // var left_key = 'ArrowLeft';
-    // var right_key = 'ArrowRight';
-    // var pill_number = 50 + Math.floor(Math.random() * 41); // return a number between 50-90
-    // var time_seconds = 60;
-    // var monster_number = 1 + Math.floor(Math.random() * 3); // return a number between 1-3
+
+
+
+
+
+
 
 
 </script>

@@ -1,48 +1,83 @@
 
 
 
+class User {
+    userName;
+    password;
+    fName;
+    lName;
+    email;
+    birthday;
+
+    constructor(values = {}) {
+        this.userName = values.userName;
+        this.password = values.password;
+        this.fName = values.fName || "Mark";
+        this.lName = values.lName || "Last";
+        this.email = values.email || "default@gmail.com";
+        this.birthday = values.birthday || 19920101;
+    }
+
+    getName() {
+        return userName;
+    }
+
+}
+
+
+
+
 
 function manageLogin() {
-    console.log("ManageLogin");
 
     var footer = document.getElementById("footer");
-    footer.innerHTML = "Manage_login";
 
     var uName = $('#userName_login').val();
+
     var pass = $('#password_login').val();
 
     var checkUserFromForm = new User({userName:uName,password:pass});
 
     var check = checkUser(checkUserFromForm);
-
     if(check){
         session = checkUserFromForm;
-        footer.innerHTML = "ManageLogin - valid user";
-    }else{
-        footer.innerHTML = "Incorrect values";
+        footer.innerHTML = "User logged in successfully";
+        document.getElementById('loginDiv').style.display='none';
 
+    }else{
+        alert("Incorrect values");
     }
 
 }
 
-function manageRegister(myForm) {
+function manageRegister() {
 
-    console.log("manageRegister");
-    var myForm = document.getElementById("registerForm");
+    var uName = $('#userName_register').val();
+    var pass = $('#password_register').val();
+    var fName = $('#fName_register').val();
+    var lName = $('#lName_register').val();
+    var email = $('#email_register').val();
 
 
-    var newUserRegistration = new User({userName:myForm.userName,password:myForm.password,
-                                            fName:myForm.fname, lName:myForm.lName,
-                                            email:myForm.email, birthday:myForm.birthday
+    var birthbay = $('#birthday_register').val();
+
+    var newUserRegistration = new User({userName:uName,password:pass,
+                                            fName:fName, lName:lName,
+                                            email:email, birthday:birthbay
     });
+    if(addUserToList(newUserRegistration)){
+        footer.innerHTML = "New user was created successfully";
+        document.getElementById('registerDiv').style.display='none'
+    }else{
+        alert("Incorrect values - registration");
+    }
 
-    addUserToList(newUserRegistration);
 
 }
 
 function checkUser(userTocheck) {
 
-    var userFromDB = single.user_db[userTocheck.userName];
+    var userFromDB = user_db[userTocheck.userName];
     if (userFromDB != null && userFromDB.password == userTocheck.password)
         return true;
 
@@ -50,14 +85,55 @@ function checkUser(userTocheck) {
 }
 
 function addUserToList(newUser) {
-    var userFromDB = user_db[userTocheck.userName];
-    if (userFromDB == null){
+    var userFromDB = user_db[newUser.userName];
+    if (userFromDB == undefined){
         user_db[newUser.userName] = newUser;
         return true;
     }
 
     return false;
 }
+
+
+
+
+$("#registerBtn").click(
+    function (event) {
+        var userNameValidation = $("#userName_register")[0].checkValidity();
+        var passwordValidation = $("#password_register")[0].checkValidity();
+        var emailValidation = $("#email_register")[0].checkValidity();
+
+        //validate if the pattern match
+        if (userNameValidation && passwordValidation && emailValidation) {
+
+            var uName = $('#userName_register').val();
+            var pass = $('#password_register').val();
+            var fName = $('#fName_register').val();
+            var lName = $('#lName_register').val();
+            var email = $('#email_register').val();
+
+
+            var birthbay = $('#birthday_register').val();
+
+            var newUserRegistration = new User({userName:uName,password:pass,
+                fName:fName, lName:lName,
+                email:email, birthday:birthbay
+            });
+            if(addUserToList(newUserRegistration)){
+                footer.innerHTML = "New user was created successfully";
+                document.getElementById('registerDiv').style.display='none'
+            }else{
+                alert("Incorrect values - registration");
+            }
+
+
+        }else {
+            $("#userName_register")[0].setCustomValidity("Please enter at least 8 characters.");
+            var isValid = $('#userName_register')[0].reportValidity();
+            event.preventDefault();
+        }
+
+    });
 
 
 
