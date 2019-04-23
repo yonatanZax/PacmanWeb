@@ -1,12 +1,13 @@
-MyGhost = function (game, map, colour, id) {
+MyGhost = function (game, map, colour, pId) {
 
     var position  = null,
         oldPos    = null,
-        id        = id,
+        id        = pId,
         direction = null,
         eatable   = null,
         eaten     = null;
 
+    var animationInterval;
 
     function getPossibleMoves(){
         var possibleMoves = map.getPossibleMoves(position.i, position.j);
@@ -29,7 +30,7 @@ MyGhost = function (game, map, colour, id) {
     }
 
     function draw(cxt){
-        var center = new Object();
+        var center = {};
         center.x = position.i * widthStep + widthStep / 2;
         center.y = position.j * heightStep + heightStep / 2;
         cxt.beginPath();
@@ -38,7 +39,7 @@ MyGhost = function (game, map, colour, id) {
         cxt.fill();
     }
 
-    function isVunerable() {
+    function isVulnerable() {
         return eatable !== null;
     }
 
@@ -59,7 +60,7 @@ MyGhost = function (game, map, colour, id) {
         return dir === LEFT && RIGHT ||
             dir === RIGHT && LEFT ||
             dir === UP && DOWN || UP;
-    };
+    }
 
     function getRandomDirection() {
         var moves = (direction === LEFT || direction === RIGHT)
@@ -70,7 +71,7 @@ MyGhost = function (game, map, colour, id) {
     function reset() {
         eaten = null;
         eatable = null;
-        position = new Object();
+        position = {};
         switch(id){
             case 0:
                 position.i = 1;
@@ -92,7 +93,7 @@ MyGhost = function (game, map, colour, id) {
         // position.i = 9;
         // position.j = 10;
         direction = getRandomDirection();
-        due = getRandomDirection();
+        // due = getRandomDirection();
     }
 
     function secondsAgo(tick) {
@@ -123,7 +124,7 @@ MyGhost = function (game, map, colour, id) {
 
 
     return {
-        "isVunerable" : isVunerable,
+        "isVulnerable" : isVulnerable,
         "isDangerous" : isDangerous,
         "makeEatable" : makeEatable,
         "reset"       : reset,

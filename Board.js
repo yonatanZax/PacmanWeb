@@ -136,12 +136,78 @@ Board = function() {
 
     }
 
+    function draw(context){
+
+        for (var i = 0; i < board.length; i++) {
+            for (var j = 0; j < board[0].length; j++) {
+                var center = {};
+                center.x = i * widthStep + widthStep / 2;
+                center.y = j * heightStep + heightStep / 2;
+                if (board[i][j] > 100) {
+                    context.beginPath();
+                    // set color
+                    if (board[i][j] === PILL_5){
+                        context.fillStyle = "purple"; //color
+                        context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+                        context.fill();
+                        context.strokeStyle = '#ffffff';
+                        context.font = '10px Helvetica';
+                        context.textAlign = 'center';
+                        context.textBaseline = 'middle';
+                        context.fillStyle = 'white';
+                        context.fillText('5', center.x, center.y);
+                        context.stroke();
+                        context.closePath();
+                    }
+                    else if(board[i][j] === PILL_15){
+                        context.fillStyle = "red"; //color
+                        context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+                        context.fill();
+                        context.strokeStyle = '#ffffff';
+                        context.font = '10px Helvetica';
+                        context.textAlign = 'center';
+                        context.textBaseline = 'middle';
+                        context.fillStyle = 'white';
+                        context.fillText('15', center.x, center.y);
+                        context.stroke();
+                        context.closePath();
+                    }else{
+                        context.fillStyle = 'blue';
+                        context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+                        context.fill();
+                        context.strokeStyle = '#ffffff';
+                        context.font = '10px Helvetica';
+                        context.textAlign = 'center';
+                        context.textBaseline = 'middle';
+                        context.fillStyle = 'white';
+                        context.fillText('25', center.x, center.y);
+                        context.stroke();
+                        context.closePath();
+
+
+                    }
+                    // context.fillStyle = "black"; //color
+                    // context.fill();
+
+                }
+                else if (board[i][j] === WALL) {
+                    context.beginPath();
+                    context.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
+                    context.fillStyle = "grey"; //color
+                    context.fill();
+                }
+            }
+
+        }
+    }
+
     return {
-        'initBoard': initBoard,
-        'findRandomEmptyCell': findRandomEmptyCell,
-        'getBoard': getBoard,
-        'boardAt': boardAt,
-        'getPossibleMoves': getPossibleMoves
+        'initBoard'             : initBoard,
+        'findRandomEmptyCell'   : findRandomEmptyCell,
+        'getBoard'              : getBoard,
+        'boardAt'               : boardAt,
+        'getPossibleMoves'      : getPossibleMoves,
+        'draw'                  : draw,
     };
 
 };

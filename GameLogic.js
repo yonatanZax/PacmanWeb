@@ -41,17 +41,8 @@ function Start() {
     // Assign PACMAN location
     board = Board();
     board.initBoard();
-    heightStep = canvas.height / board.getBoard().length;
-    widthStep = canvas.width / board.getBoard()[0].length;
+    setHeightWidthStep();
 
-    // var emptyCellPacman = board.findRandomEmptyCell();
-    // // board.board[emptyCellPacman[0]][emptyCellPacman[1]] = PACMAN;
-    // shape.i = emptyCellPacman[0];
-    // shape.j = emptyCellPacman[1];
-    // for (var i = 0; i < monster_number; i ++){
-    //     ghosts[i] = MyGhost({"getTick":getTick}, board,'black', i);
-    //     ghosts[i].reset();
-    // }
     specialSnack = SpecialSnack({"getTick":getTick}, board,'black', 3);
     setCharactersLocations();
 
@@ -104,123 +95,71 @@ function GetKeyPressed() {
     }
 }
 
+function setHeightWidthStep(){
+    heightStep = canvas.height / board.getBoard()[0].length;
+    widthStep = canvas.width / board.getBoard().length;
+}
+
 function Draw() {
     context.clearRect(0, 0, canvas.width, canvas.height); //clean board
     lblScore.value = score;
     lblTime.value = time_elapsed;
-    heightStep = canvas.height / board.getBoard()[0].length;
-    widthStep = canvas.width / board.getBoard().length;
-    for (var i = 0; i < board.getBoard().length; i++) {
-        for (var j = 0; j < board.getBoard()[0].length; j++) {
-            var center = new Object();
-            center.x = i * widthStep + widthStep / 2;
-            center.y = j * heightStep + heightStep / 2;
-            if (i === shape.i && j === shape.j) {
-                context.beginPath();
-                if(pacmanDirection === 'up'){
-                    context.arc(center.x, center.y, widthStep / 2,  (1.50 +.15) % 2 * Math.PI, (1.50 +1.85) % 2 * Math.PI); // half circle
-                    context.lineTo(center.x, center.y);
-                    context.fillStyle = pac_color; //color
-                    context.fill();
-                    context.beginPath();
-                    context.arc(center.x -12, center.y -3, 4, 0, 2 * Math.PI); // circle
-                }else if (pacmanDirection === 'down'){
-                    context.arc(center.x, center.y, widthStep / 2, (0.5 + 0.15) % 2 * Math.PI, (0.5 + 1.85) % 2 * Math.PI); // half circle
-                    context.lineTo(center.x, center.y);
-                    context.fillStyle = pac_color; //color
-                    context.fill();
-                    context.beginPath();
-                    context.arc(center.x + 12, center.y +3, 4, 0, 2 * Math.PI); // circle
-                }else if(pacmanDirection === 'right'){
-                    context.arc(center.x, center.y, widthStep / 2, (0 + 0.15) % 2 * Math.PI, (0 + 1.85) % 2  * Math.PI); // half circle
-                    context.lineTo(center.x, center.y);
-                    context.fillStyle = pac_color; //color
-                    context.fill();
-                    context.beginPath();
-                    context.arc(center.x + 3, center.y - 12, 4, 0, 2 * Math.PI); // circle
-                }else if (pacmanDirection === 'left'){
-                    context.arc(center.x, center.y, widthStep / 2, (1 + 0.15) % 2* Math.PI, (1 + 1.85) % 2 * Math.PI); // half circle
-                    context.lineTo(center.x, center.y);
-                    context.fillStyle = pac_color; //color
-                    context.fill();
-                    context.beginPath();
-                    context.arc(center.x + 3, center.y - 12, 4, 0, 2 * Math.PI); // circle
-                }
-                context.fillStyle = "black"; //color
-                context.scale.x = -1;
-                // rotatePacman(context);
-                context.fill();
-                context.setTransform(1, 0, 0, 1, 0, 0);
-            }
+    // change height ad width in case it was changed
+    setHeightWidthStep();
 
-            else if (board.boardAt(i,j) > 100) {
-                context.beginPath();
-                // context.font = '10px Helvetica';
-                // context.textAlign = 'center';
-                // context.textBaseline = 'middle';
-
-                // set color
-                if (board.boardAt(i,j) === PILL_5){
-                    context.fillStyle = "purple"; //color
-                    context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-                    context.fill();
-                    context.strokeStyle = '#ffffff';
-                    context.font = '10px Helvetica';
-                    context.textAlign = 'center';
-                    context.textBaseline = 'middle';
-                    context.fillStyle = 'white';
-                    context.fillText('5', center.x, center.y);
-                    context.stroke();
-                    context.closePath();
-                }
-                else if(board.boardAt(i,j) === PILL_15){
-                    context.fillStyle = "red"; //color
-                    context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-                    context.fill();
-                    context.strokeStyle = '#ffffff';
-                    context.font = '10px Helvetica';
-                    context.textAlign = 'center';
-                    context.textBaseline = 'middle';
-                    context.fillStyle = 'white';
-                    context.fillText('15', center.x, center.y);
-                    context.stroke();
-                    context.closePath();
-                }else{
-                    context.fillStyle = 'blue';
-                    context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-                    context.fill();
-                    context.strokeStyle = '#ffffff';
-                    context.font = '10px Helvetica';
-                    context.textAlign = 'center';
-                    context.textBaseline = 'middle';
-                    context.fillStyle = 'white';
-                    context.fillText('25', center.x, center.y);
-                    context.stroke();
-                    context.closePath();
-
-
-                }
-                // context.fillStyle = "black"; //color
-                // context.fill();
-
-            }
-            else if (board.boardAt(i,j) === WALL) {
-                context.beginPath();
-                context.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
-                context.fillStyle = "grey"; //color
-                context.fill();
-            }
-
-        }
-    }
+    // draw board
+    board.draw(context);
+    // draw pacman
+    drawPacMan(context);
+    // draw ghosts
     for (var i = 0; i < ghosts.length; i++){
         ghosts[i].draw(context);
     }
+    // draw special snack
     if (specialSnack.isAlive()){
         specialSnack.draw(context);
     }
+}
 
-
+function drawPacMan(context){
+    var center = {};
+    center.x = shape.i * widthStep + widthStep / 2;
+    center.y = shape.j * heightStep + heightStep / 2;
+    context.beginPath();
+    if(pacmanDirection === 'up'){
+        context.arc(center.x, center.y, widthStep / 2,  (1.50 +.15) % 2 * Math.PI, (1.50 +1.85) % 2 * Math.PI); // half circle
+        context.lineTo(center.x, center.y);
+        context.fillStyle = pac_color; //color
+        context.fill();
+        context.beginPath();
+        context.arc(center.x -12, center.y -3, 4, 0, 2 * Math.PI); // circle
+    }else if (pacmanDirection === 'down'){
+        context.arc(center.x, center.y, widthStep / 2, (0.5 + 0.15) % 2 * Math.PI, (0.5 + 1.85) % 2 * Math.PI); // half circle
+        context.lineTo(center.x, center.y);
+        context.fillStyle = pac_color; //color
+        context.fill();
+        context.beginPath();
+        context.arc(center.x + 12, center.y +3, 4, 0, 2 * Math.PI); // circle
+    }else if(pacmanDirection === 'right'){
+        context.arc(center.x, center.y, widthStep / 2, (0 + 0.15) % 2 * Math.PI, (0 + 1.85) % 2  * Math.PI); // half circle
+        context.lineTo(center.x, center.y);
+        context.fillStyle = pac_color; //color
+        context.fill();
+        context.beginPath();
+        context.arc(center.x + 3, center.y - 12, 4, 0, 2 * Math.PI); // circle
+    }else if (pacmanDirection === 'left'){
+        context.arc(center.x, center.y, widthStep / 2, (1 + 0.15) % 2* Math.PI, (1 + 1.85) % 2 * Math.PI); // half circle
+        context.lineTo(center.x, center.y);
+        context.fillStyle = pac_color; //color
+        context.fill();
+        context.beginPath();
+        context.arc(center.x + 3, center.y - 12, 4, 0, 2 * Math.PI); // circle
+    }
+    context.fillStyle = "black"; //color
+    context.scale.x = -1;
+    // rotatePacman(context);
+    context.fill();
+    context.setTransform(1, 0, 0, 1, 0, 0);
 }
 
 function moveGhosts(){
@@ -353,32 +292,27 @@ function UpdatePosition() {
 
 }
 
+function gameFinished(){
+    // TODO - do what it say it suppose to do
+}
+
+function testHit(character){
+    return ((character.getI() === shape.i && character.getJ() === shape.j) ||
+        (oldPos !== null && (character.getI() === oldPos.i && character.getJ() === oldPos.j ) &&
+            (character.getOldPosition().i === shape.i && character.getOldPosition().j === shape.j)));
+}
+
 function testGhostHit(){
     for (var i = 0; i < ghosts.length; i++){
-        var bool_1 = (ghosts[i].getI() === shape.i && ghosts[i].getJ() === shape.j);
-        var bool_2 = oldPos !== null;
-        var bool_3;
-        var bool_4;
-        if (bool_2) {
-            bool_3 = (ghosts[i].getI() === oldPos.i && ghosts[i].getJ() === oldPos.j);
-            bool_4 = (ghosts[i].getOldPosition().i === shape.i && ghosts[i].getOldPosition().j === shape.j);
-        }
-        if ((ghosts[i].getI() === shape.i && ghosts[i].getJ() === shape.j) ||
-            (oldPos !== null && (ghosts[i].getI() === oldPos.i && ghosts[i].getJ() === oldPos.j ) &&
-                (ghosts[i].getOldPosition().i === shape.i && ghosts[i].getOldPosition().j === shape.j))){
-            return true;
+        if (testHit(ghosts[i])){
+            // return true;
         }
     }
     return false;
 }
 
 function testSpecialSnackHit(){
-    if ((specialSnack.getI() === shape.i && specialSnack.getJ() === shape.j) ||
-        (oldPos !== null && (specialSnack.getI() === oldPos.i && specialSnack.getJ() === oldPos.j ) &&
-            (specialSnack.getOldPosition().i === shape.i && specialSnack.getOldPosition().j === shape.j))){
-        return true;
-    }
-    return false;
+    return testHit(specialSnack);
 }
 
 
