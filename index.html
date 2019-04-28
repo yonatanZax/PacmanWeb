@@ -11,6 +11,19 @@
     <script type="text/javascript" src="SwitchContent.js"></script>
     <script type="text/javascript" src="UserManager.js"></script>
     <script type="text/javascript" src="SettingManager.js"></script>
+    <script type="text/javascript" src="MyGhost.js" ></script>
+    <script type="text/javascript" src="Board.js" ></script>
+    <script type="text/javascript" src="SpecialSnack.js" ></script>
+
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+
+    <!-- Reference mousetrap from a local file -->
+<!--    <script src="mousetrap.min.js"></script>-->
+
+    <!-- Or using a CDN -->
+    <script src="https://cdn.rawgit.com/ccampbell/mousetrap/825ce50c/mousetrap.min.js"></script>
 
 
     <!--        css files-->
@@ -26,28 +39,57 @@
 
 <header>
 
-    <div class="toolbar" style="background-color: black">
-        <img src="images/Marvel-Pacman%20header.png" height="60">
-    </div>
+<!--    <div class="toolbar" style="background-color: black">-->
+<!--        <img src="images/Marvel-Pacman%20header.png" height="60">-->
+<!--    </div>-->
+
+
+
 
 
     <div class="toolbar">
-        <button onclick="showWelcome()">Welcome</button>
-        <button onclick="document.getElementById('aboutModal').style.display='block'" style="width:auto;">About</button>
-        <!--        <button  onclick="showAbout()">About</button>-->
-        <button onclick="setSettings()">Settings</button>
-        <button onclick="playGame()">EndGame</button>
+
+        <menu type="context" id="mymenu">
+            <menuitem label="Refresh" onclick="showWelcome();" style="color: white"></menuitem>
+            <!--        <menuitem label="Refresh" onclick="window.location.reload();" icon="ico_reload.png"></menuitem>-->
+
+        </menu>
+
+
+        <div style="float: left;">
+            <button onclick="showWelcome()">Welcome</button>
+            <button onclick="document.getElementById('aboutModal').style.display='block'" style="width:auto;">About</button>
+            <!--        <button  onclick="showAbout()">About</button>-->
+            <button onclick="setSettings()">Settings</button>
+            <button onclick="playGame()">EndGame</button>
+        </div>
+
+
+
+        <img src="images/Marvel-Pacman%20header.png" height="60" style="margin-left: 10%">
+
+
+        <div style="float: right;">
+
+            <button  onclick="logout()" style=" margin-right: 10px">Logout</button>
+
+
+        </div>
+
+
+
+
     </div>
 
 
 </header>
 
-
+<p id="userName_display" style="color: black; margin-left: 10px">Name</p>
 
 
 <!--/****   Welcome - login and registration    ****/-->
 
-<div id="welcome" class="visible frame" style="background-color: yellow">
+<div id="welcome" class="visible frame" >
     <br>
 
     <img src="images/Marvel-Pacman-logo-bw.png" class="center">
@@ -161,8 +203,8 @@
                     <button type="button" onclick="document.getElementById('registerDiv').style.display='none'"
                             class="cancelbtn">Cancel
                     </button>
-                    <button id="registerBtn" class="submitBtn">Sign Up</button>
-<!--                    <button id="registerBtn" class="submitBtn" onclick="manageRegister()">Sign Up</button>-->
+<!--                    <button id="registerBtn" class="submitBtn">Sign Up</button>-->
+                    <button id="registerBtn" class="submitBtn" onclick="manageRegister()">Sign Up</button>
                 </div>
             </div>
 
@@ -197,33 +239,49 @@
 
             <!--            Keyboard Settings               -->
 
+
+
+
+            <div class="center">
+                <button onclick="settings_randomValues()" style="width: 100%">Set random values ???</button>
+                <br>
+
+            </div>
+
+<!--            <p id="testSettings"> Test</p>-->
+
             <h3>Set game keyboard</h3><br>
-            <div class="center">
-                <label><b>Up key:</b> <pr id="upKeyLabel"></pr></label><br>
-                <input id="settings_upKey" type="text" name="settings_upKey" onkeypress="getKey(event,'up')">
 
-                <br>
-            </div>
+            <table>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="center">
+                        <button id="settings_upKey" class="keyboardBtn" onclick="setCurDirection('up')">UP</button>
+                    </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="center">
+                            <button id="settings_leftKey" class="keyboardBtn" onclick="setCurDirection('left')">LEFT</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="center">
+                            <button id="settings_downKey" class="keyboardBtn" onclick="setCurDirection('down')">DOWN</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="center">
+                            <button id="settings_rightKey" class="keyboardBtn" onclick="setCurDirection('right')">RIGHT</button>
+                        </div>
+                    </td>
+                </tr>
 
-            <div style="    margin-left: auto; margin-right: auto; width: 80%;">
-                <label><b>Left key:</b> <pr id="leftKeyLabel"></pr></label>
-                <input id="settings_leftKey" type="text" name="settings_leftKey" onkeypress="getKey(event,'left')">
 
-                <input id="settings_rightKey" type="text" name="settings_rightKey" onkeypress="getKey(event,'right')">
-                <label><b>Right key</b> <pr id="rightKeyLabel"></pr></label>
-
-            </div>
-
-
-            <div class="center">
-
-                <input id="settings_downKey" type="text" name="settings_downKey" onkeypress="getKey(event,'down')">
-                <br><label><b>Down key:</b> <pr id="downKeyLabel"></pr></label>
-
-                <br>
-            </div>
-
-
+            </table>
 
 
 
@@ -278,7 +336,7 @@
                     </td>
 
                     <td>
-                        <select name="Color">
+                        <select class="inputField" name="Color">
                             <option value="Red">Red</option>
                             <option value="Blue">Blue</option>
                             <option value="Green" selected>Green</option>
@@ -296,6 +354,7 @@
                 <button onclick="saveSettings()" style="width: 100%">Save changes</button>
             </div>
 
+            <br>
 
         </div>
 
@@ -303,23 +362,29 @@
 </div>
 
 
+
 <!--/****   EndGame    ****/-->
 
 <div id="game" class="hidden">
+
+    <div class="center">
+        SCORE:
+        <input class="gameInput" id="lblScore" type="text"/>
+
+        TIME:
+        <input class="gameInput" id="lblTime" type="text"/>
+
+        LIVES:
+        <input class="gameInput" id="lives" type="text"/>
+    </div>
+
+    <p class="tab"></p>
+
+<!--    <img src="images/thanos_glove.png" height="70" width="100">-->
+
+
+    <canvas id="canvas" class="center" height="800px" width="800px"></canvas>
     <br>
-
-    SCORE:
-    <input class="gameInput" id="lblScore" type="text"/>
-
-    TIME:
-    <input class="gameInput" id="lblTime" type="text"/>
-
-    LIVES:
-    <input class="gameInput" id="lives" type="text"/>
-
-    <br><br>
-    <canvas id="canvas" class="center" height="600" width="600"></canvas>
-    <br><br>
 
 
 </div>
@@ -333,6 +398,12 @@
 <script>
 
 
+
+    function logout() {
+        switchContent("welcome");
+        session = null;
+        document.getElementById("userName_display").innerHTML = "Please login";
+    }
 
     function showWelcome() {
         switchContent("welcome");
@@ -350,40 +421,57 @@
 
     function playGame() {
         if (session != null) {
-
             switchContent("game");
             Start();
+        }else {
+            var footer = document.getElementById("footer");
+            footer.innerHTML = "Please sign in\ register before playing";
+
         }
     }
 
 
     var user_db;
     var session;
-    var context;
 
 
-    window.addEventListener("load",initiateVars,false);
-
-    function initiateVars() {
-        // var session = null;
-        user_db = {};
-        var aUser = new User({userName:"a",password:"a"});
-        user_db[aUser.userName] = aUser;
+    user_db = {};
+    var aUser = new User({userName:"a",password:"a"});
+    user_db[aUser.userName] = aUser;
 
 
-        session = aUser;
-        context = canvas.getContext("2d");
-    }
+    session = aUser;
+    // var session = null;
+
+    document.getElementById("userName_display").innerHTML = "Please login";
+
+
+    var context = canvas.getContext("2d");
+    var shape = new Object();
+    var oldPos = null;
+    var board;
+    var score = 0;
+    var pac_color;
+    var start_time;
+    var time_elapsed;
+    var interval;
 
 
 
+    // settings variables
+    var up_key = 'ArrowUp';
+    var down_key = 'ArrowDown';
+    var left_key = 'ArrowLeft';
+    var right_key = 'ArrowRight';
+    var pill_number ; // return a number between 50-90
+    var time_seconds = 60;
+    var monster_number; // return a number between 1-3
 
-
-
-
-
-
-
+    var ghosts = [];
+    var specialSnack;
+    var tick;
+    var lives;
+    // generateRandomStart();
 
 
 </script>
