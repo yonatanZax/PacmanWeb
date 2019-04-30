@@ -107,9 +107,11 @@ function setHeightWidthStep(){
 
 function Draw() {
     context.clearRect(0, 0, canvas.width, canvas.height); //clean board
-    lblScore.value = score;
-    lblTime.value = time_elapsed;
-    lblLives.value = lives;
+
+    document.getElementById("lblScore").innerHTML = score;
+    document.getElementById("lblTime").innerHTML = time_elapsed;
+    document.getElementById("lblLives").innerHTML = lives;
+
     // change height ad width in case it was changed
     setHeightWidthStep();
 

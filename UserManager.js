@@ -9,15 +9,13 @@ class User {
     constructor(values = {}) {
         this.userName = values.userName;
         this.password = values.password;
-        this.fName = values.fName || "Mark";
-        this.lName = values.lName || "Last";
-        this.email = values.email || "default@gmail.com";
-        this.birthday = values.birthday || 19920101;
+        this.fName = values.fName;
+        this.lName = values.lName;
+        this.email = values.email;
+        this.birthday = values.birthday;
     }
 
-    getName() {
-        return userName;
-    }
+
 
 }
 
@@ -36,7 +34,7 @@ function manageLogin() {
 
     var check = checkUser(checkUserFromForm);
     if (check) {
-        session = checkUserFromForm;
+        session = user_db[uName];
         user_display.innerHTML = session.fName + " " + session.lName + " is logged";
         footer.innerHTML = "User logged in successfully";
         document.getElementById('loginDiv').style.display = 'none';
@@ -123,6 +121,7 @@ $(document).ready(function (event) {
                 if(addUserToList(newUserRegistration)){
                     footer.innerHTML = "New user was created successfully";
                     document.getElementById('registerDiv').style.display='none'
+                    session = null;
                 }else{
                     alert("Incorrect values - registration");
                 }

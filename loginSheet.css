@@ -26,6 +26,7 @@ button:hover {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
+
 }
 
 /* Center the image and position the close button */
@@ -145,13 +146,14 @@ button {
 
 .submitBtn{
     background-color: #4CAF50;
-    color: black;
+    color: white;
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
+    border: solid;
     cursor: pointer;
     width: 50%;
     opacity: 0.9;
+
 }
 
 button:hover {
@@ -166,8 +168,11 @@ button:hover {
 
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn, .signupbtn {
+    color: white;
     float: left;
     width: 50%;
+    border: solid;
+
 }
 
 /* Add padding to container elements */

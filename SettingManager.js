@@ -9,6 +9,11 @@ function generateRandomStart() {
         down_key : 'ArrowDown',
         left_key : 'ArrowLeft',
         right_key : 'ArrowRight',
+
+        pill_5Points:  '#8000ff', // purple
+        pill_15Points: '#ff3300', // red
+        pill_25Points: '#0000ff', // blue
+
         pill_number : 50 + Math.floor(Math.random() * 41), // return a number between 50-90
         time_seconds : 60 + Math.floor(Math.random() * 120),
         monster_number : 1 + Math.floor(Math.random() * 3), // return a number between 1-3
@@ -35,17 +40,11 @@ function settings_randomValues() {
     $("#settings_numOfMonsters").val(rand["monster_number"]);
 
 
+    $("#settings_5Points").val(rand["pill_5Points"]);
+    $("#settings_15Points").val(rand["pill_15Points"]);
+    $("#settings_25Points").val(rand["pill_25Points"]);
 
 
-
-    // down_key = $("#settings_downKey").val();
-    // left_key = $("#settings_leftKey").val();
-    // right_key = $("#settings_rightKey").val();
-    //
-    //
-    // pill_number = $("#settings_numOfBalls").val();
-    // time_seconds = $("#settings_timeToPlay").val();
-    // monster_number = $("#settings_numOfMonsters").val();
 
 }
 
@@ -127,6 +126,10 @@ function saveSettings() {
     pill_number = $("#settings_numOfBalls").val();
     time_seconds = $("#settings_timeToPlay").val();
     monster_number = $("#settings_numOfMonsters").val();
+
+    pill_5Color = $("#settings_5Points").val();
+    pill_15Color = $("#settings_15Points").val();
+    pill_25Color = $("#settings_25Points").val();
 
 
     switchContent('welcome');

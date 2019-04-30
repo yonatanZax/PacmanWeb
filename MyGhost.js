@@ -43,11 +43,26 @@ MyGhost = function (game, map, colour, pId) {
 
     function draw(cxt){
         var center = {};
+
+
+        /*    Draw as Image    */
+        const ghostImag = new Image();
+        ghostImag.src = 'images/groot_ghost.png';
+
         center.x = position.i * widthStep + widthStep / 2;
         center.y = position.j * heightStep + heightStep / 2;
         cxt.beginPath();
-        cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
-        cxt.fillStyle = "black"; //color
+
+        var xPos = center.x - widthStep / 2;
+        var yPos = center.y - heightStep / 2;
+        var imgWidth = widthStep;
+        var imgHeight = heightStep;
+
+
+        cxt.drawImage(ghostImag, xPos, yPos, imgWidth - 10, imgHeight);
+
+        // cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
+        // cxt.fillStyle = "black"; //color
         cxt.fill();
     }
 

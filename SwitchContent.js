@@ -20,5 +20,7 @@ function switchContent(makeVisible) {
     var footer = document.getElementById("footer");
     footer.innerHTML = makeVisible;
 
+    document.getElementById('loginDiv').style.display='none';
+
 
 }

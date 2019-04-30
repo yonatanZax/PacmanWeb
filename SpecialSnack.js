@@ -31,7 +31,7 @@ SpecialSnack = function (game, map, colour, id) {
 
         /*    Draw as Image    */
         const snackImg = new Image();
-        snackImg.src = 'images/time_stone.png';
+        snackImg.src = 'images/thanos_glove.png';
 
         center.x = position.i * widthStep + widthStep / 2;
         center.y = position.j * heightStep + heightStep / 2;
@@ -39,11 +39,11 @@ SpecialSnack = function (game, map, colour, id) {
 
         var xPos = center.x - widthStep / 2;
         var yPos = center.y - heightStep / 2;
-        var imgWidth = widthStep;
-        var imgHeight = heightStep;
+        var imgWidth = widthStep + 10;
+        var imgHeight = heightStep + 10;
 
 
-        cxt.drawImage(snackImg, xPos, yPos, imgWidth - 10, imgHeight);
+        cxt.drawImage(snackImg, xPos, yPos, imgWidth, imgHeight);
         // cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
         // cxt.fillStyle = "gold"; //color
         cxt.fill();
