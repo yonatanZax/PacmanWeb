@@ -149,8 +149,10 @@ Board = function() {
                     context.beginPath();
                     // set color
                     if (board[i][j] === PILL_5){
-                        context.fillStyle = "purple"; //color
-                        context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+
+                        context.fillStyle = pill_5Color; //color
+                        context.ellipse(center.x, center.y, 8, 12, 0, 0, 2 * Math.PI); // ellipse
+                        // context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
                         context.fill();
                         context.strokeStyle = '#ffffff';
                         context.font = '10px Helvetica';
@@ -162,8 +164,9 @@ Board = function() {
                         context.closePath();
                     }
                     else if(board[i][j] === PILL_15){
-                        context.fillStyle = "red"; //color
-                        context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+                        context.fillStyle = pill_15Color; //color
+                        context.ellipse(center.x, center.y, 8, 12, 0, 0, 2 * Math.PI); // ellipse
+                        // context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
                         context.fill();
                         context.strokeStyle = '#ffffff';
                         context.font = '10px Helvetica';
@@ -174,8 +177,9 @@ Board = function() {
                         context.stroke();
                         context.closePath();
                     }else{
-                        context.fillStyle = 'blue';
-                        context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+                        context.fillStyle = pill_25Color;
+                        context.ellipse(center.x, center.y, 8, 12, 0, 0, 2 * Math.PI); // ellipse
+                        // context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
                         context.fill();
                         context.strokeStyle = '#ffffff';
                         context.font = '10px Helvetica';
@@ -193,6 +197,27 @@ Board = function() {
 
                 }
                 else if (board[i][j] === WALL) {
+
+
+                    // /*    Draw as Image    */
+                    // const wallImg = new Image();
+                    // wallImg.src = 'images/wall.png';
+                    //
+                    // context.beginPath();
+                    //
+                    // var xPos = center.x - widthStep / 2;
+                    // var yPos = center.y - heightStep / 2;
+                    // var imgWidth = widthStep;
+                    // var imgHeight = heightStep;
+                    //
+                    //
+                    // context.drawImage(wallImg, xPos, yPos, imgWidth, imgHeight);
+                    //
+                    //
+                    // context.fill();
+
+
+
                     context.beginPath();
                     context.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
                     context.fillStyle = "grey"; //color

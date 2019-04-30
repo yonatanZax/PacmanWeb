@@ -22,6 +22,10 @@ body {
 }
 
 
+input:invalid {
+    border-color: #f44336;
+    border-style: solid;
+}
 
 
 .myfooter{
@@ -71,12 +75,11 @@ td{
 
 .inputField{
     width: 50%;
-    padding: 5%;
+    padding: 0.5%;
     margin: 5px 10px 10px 20px;
-    display: inline-block;
+    /*display: inline-block;*/
     font-weight: bold;
-
-
+    text-align: center;
 }
 
 
@@ -99,6 +102,69 @@ td{
 
 .visible{
     display: inline;
+}
+
+
+
+
+
+/* Button animation */
+
+.animation_btn {
+    border-radius: 4px;
+    background-color: yellow;
+    border: none;
+    color: black;
+    text-align: center;
+    font-size: 16px;
+    padding: 20px;
+    width: 160px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.animation_btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.animation_btn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.animation_btn:hover span {
+    padding-right: 25px;
+}
+
+.animation_btn:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+
+
+
+
+/* Fonts */
+
+@font-face {
+    font-family:"digital_font";
+    src: url("digital_font.ttf") format("truetype");
+}
+
+
+.gameDigital{
+    width: 10%;
+    padding: 0.5%;
+    margin: 5px 10px 10px 20px;
 }
 
 
