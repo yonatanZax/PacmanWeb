@@ -96,7 +96,7 @@ $(document).ready(function (event) {
     $("#registerBtn").click(
 
         function () {
-            // var userNameValidation = $("#userName_register")[0].checkValidity();
+//         var userNameValidation = $("#userName_register")[0].checkValidity();
             var fNameValidation = $("#fName_register")[0].checkValidity();
             var lNameValidation = $("#lName_register")[0].checkValidity();
 
@@ -105,7 +105,7 @@ $(document).ready(function (event) {
 
             //validate if the pattern match
             if (passwordValidation && fNameValidation && lNameValidation) {
-            // if (userNameValidation && passwordValidation && emailValidation) {
+//         if (userNameValidation && passwordValidation && emailValidation) {
 
                 var uName = $('#userName_register').val();
                 var pass = $('#password_register').val();

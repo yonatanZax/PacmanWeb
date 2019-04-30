@@ -1,58 +1,119 @@
 MyGhost = function (game, map, colour, pId) {
 
-    var position = null,
-        oldPos = null,
-        id = pId,
+    var position  = null,
+        oldPos    = null,
+        id        = pId,
         direction = null,
-        eatable = null,
-        eaten = null;
+        eatable   = null,
+        eaten     = null;
 
-    var animationInterval;
 
-    function getPossibleMoves() {
+    function getPossibleMoves(){
         var possibleMoves = map.getPossibleMoves(position.i, position.j);
-        if (oldPos === null || possibleMoves.length === 1) {
+        if (oldPos === null || possibleMoves.length === 1){
             return possibleMoves;
         }
-        possibleMoves = possibleMoves.filter(function (value, index, arr) {
-            return value.i !== oldPos.i || value.j !== oldPos.j;
+        possibleMoves = possibleMoves.filter(function(value, index, arr){
+           return value.i !== oldPos.i || value.j !== oldPos.j;
         });
         return possibleMoves;
     }
 
-    function getOldPosition() {
+    function getOldPosition(){
         return oldPos;
     }
 
-    function setPosition(nPosition) {
+    function setPosition(nPosition){
         oldPos = position;
         position = nPosition;
+        if (oldPos.i < position.i){
+            direction = 'right';
+        }
+        else if(oldPos.i > position.i){
+            direction = 'left';
+        }
+        else if(oldPos.j < position.j){
+            direction = 'down';
+        }
+        else if(oldPos.j > position.j){
+            direction = 'up'
+        }
+
     }
 
-    function draw(cxt) {
+    function draw(cxt){
         var center = {};
-
-
-        /*    Draw as Image    */
-        const ghostImag = new Image();
-        ghostImag.src = 'images/thanos_pacman.png';
-
         center.x = position.i * widthStep + widthStep / 2;
         center.y = position.j * heightStep + heightStep / 2;
         cxt.beginPath();
-
-        var xPos = center.x - widthStep / 2;
-        var yPos = center.y - heightStep / 2;
-        var imgWidth = widthStep;
-        var imgHeight = heightStep;
-
-
-        cxt.drawImage(ghostImag, xPos, yPos, imgWidth - 10, imgHeight);
-
-        // cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
-        // cxt.fillStyle = "black"; //color
+        cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
+        cxt.fillStyle = "black"; //color
         cxt.fill();
     }
+
+    // function draw(cxt){
+    //     var center = {};
+    //     context.clearRect(x - widthStep/2 - 2, y - heightStep/2 - 2, widthStep + 2, heightStep + 2);
+    //
+    //     center.x = position.i * widthStep + widthStep / 2;
+    //     center.y = position.j * heightStep + heightStep / 2;
+    //     x = center.x;
+    //     y = center.y;
+    //     if (direction !== null){
+    //         if (direction === 'left'){
+    //             speedX = - widthStep / 50;
+    //             speedY = 0;
+    //         }
+    //         else if(direction === 'right'){
+    //             speedX = widthStep / 50;
+    //             speedY = 0;
+    //         }
+    //         else if(direction === 'up'){
+    //             speedY = - heightStep/50;
+    //             speedX = 0;
+    //         }
+    //         else if(direction === 'down'){
+    //             speedY = heightStep/50;
+    //             speedX = 0;
+    //         }
+    //     }
+    //     // speedX = widthStep / 50;
+    //     // speedY = heightStep/50;
+    //     animationIntervalTime = 5;
+    //     if (interval !== null){
+    //         clearInterval(animationInterval);
+    //     }
+    //     animationInterval = setInterval(updateCharacter, animationIntervalTime)
+    // }
+    // var x = 0,
+    //     y = 0,
+    //     speedX = 0,
+    //     speedY = 0,
+    //     animationInterval = null,
+    //     animationIntervalTime;
+    //
+    //
+    // function clear(){
+    //     context.clearRect(x - widthStep/2 - 2, y - heightStep/2 - 2, widthStep + 2, heightStep + 2);
+    // }
+    //
+    // function newPos() {
+    //     x += speedX;
+    //     y += speedY;
+    // }
+    //
+    // function update(){
+    //     context.beginPath();
+    //     context.rect(x - widthStep/2, y - heightStep/2, widthStep, heightStep);
+    //     context.fillStyle = "black"; //color
+    //     context.fill();
+    // }
+    //
+    // function updateCharacter() {
+    //     clear();
+    //     newPos();
+    //     update();
+    // }
 
     function isVulnerable() {
         return eatable !== null;
@@ -87,7 +148,7 @@ MyGhost = function (game, map, colour, pId) {
         eaten = null;
         eatable = null;
         position = {};
-        switch (id) {
+        switch(id){
             case 0:
                 position.i = 1;
                 position.j = 1;
@@ -115,11 +176,11 @@ MyGhost = function (game, map, colour, pId) {
         return (game.getTick() - tick);
     }
 
-    function getI() {
+    function getI(){
         return position.i;
     }
 
-    function getJ() {
+    function getJ(){
         return position.j;
     }
 
@@ -131,7 +192,7 @@ MyGhost = function (game, map, colour, pId) {
             } else {
                 return "#0000BB";
             }
-        } else if (eaten) {
+        } else if(eaten) {
             return "#222";
         }
         return colour;
@@ -139,13 +200,13 @@ MyGhost = function (game, map, colour, pId) {
 
 
     return {
-        "isVulnerable": isVulnerable,
-        "isDangerous": isDangerous,
-        "makeEatable": makeEatable,
-        "reset": reset,
-        "draw": draw,
-        'getI': getI,
-        'getJ': getJ,
+        "isVulnerable" : isVulnerable,
+        "isDangerous" : isDangerous,
+        "makeEatable" : makeEatable,
+        "reset"       : reset,
+        "draw"        : draw,
+        'getI'        : getI,
+        'getJ'        : getJ,
         'getOldPosition': getOldPosition,
         'setPosition': setPosition,
         'getPossibleMoves': getPossibleMoves,

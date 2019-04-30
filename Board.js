@@ -10,7 +10,9 @@ var PILL_15     = 115;
 var PILL_25     = 125;
 
 Board = function() {
-    var board;
+    var board,
+        curGameFoodRemain;
+
     function initBoard() {
         board_demo = [
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -45,6 +47,7 @@ Board = function() {
         }
 
         var food_remain = pill_number;
+        curGameFoodRemain = pill_number;
         // start_time = new Date();
         // Assign PACMAN location
         // var emptyCellPacman = findRandomEmptyCell(board);
@@ -102,35 +105,34 @@ Board = function() {
         moves = new Array();
         if (i - 1 >= 0 && (boardAt(i-1,j) !== WALL && boardAt(i-1,j) !== BLOCK)){
             moves.push({'i': i-1,
-                'j': j});
+                        'j': j});
         }else if (i - 1 < 0 && (boardAt(board.length - 1,j) !== WALL && boardAt(board.length - 1,j) !== BLOCK)){
             moves.push({'i': board.length - 1,
                 'j': j});
         }
         if (j - 1 >= 0 && (boardAt(i,j-1) !== WALL && boardAt(i,j-1) !== BLOCK)){
             moves.push({'i': i,
-                'j': j-1});
+                            'j': j-1});
         }
-        if (i + 1 < board.length - 1 && (boardAt(i+1,j) !== WALL && boardAt(i+1,j) !== BLOCK)){
+        if (i + 1 < board.length  && (boardAt(i+1,j) !== WALL && boardAt(i+1,j) !== BLOCK)){
             moves.push({'i': i+1,
                 'j': j});
-        }else if (i + 1 === board.length && (boardAt(0,j) !== WALL && boardAt(0,j) !== BLOCK)){
+        }else if (i + 1 >= board.length && (boardAt(0,j) !== WALL && boardAt(0,j) !== BLOCK)){
             moves.push({'i': 0,
                 'j': j});
         }
         if (j + 1 < board[0].length && (boardAt(i,j+1) !== WALL && boardAt(i,j+1) !== BLOCK)){
             moves.push({'i': i,
-                'j': j+1});
+                            'j': j+1});
         }
-
-        if (j - 1 < 0 && (boardAt(i,j-1) !== WALL && boardAt(i,j-1) !== BLOCK)){
-            moves.push({'i': i,
-                'j': j-1});
-        }
-        if (i + 1 === board[0].length && (boardAt(i+1,j) !== WALL && boardAt(i+1,j) !== BLOCK)){
-            moves.push({'i': i+1,
-                'j': j});
-        }
+        // if (j - 1 < 0 && (boardAt(i,j-1) !== WALL && boardAt(i,j-1) !== BLOCK)){
+        //     moves.push({'i': i,
+        //         'j': j-1});
+        // }
+        // if (i + 1 === board[0].length && (boardAt(i+1,j) !== WALL && boardAt(i+1,j) !== BLOCK)){
+        //     moves.push({'i': i+1,
+        //         'j': j});
+        // }
 
         return moves;
 
@@ -201,6 +203,17 @@ Board = function() {
         }
     }
 
+    function setEmpty(i, j){
+        if(board[i][j] !== EMPTY){
+            board[i][j] = EMPTY;
+            curGameFoodRemain--;
+            if (curGameFoodRemain === 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
     return {
         'initBoard'             : initBoard,
         'findRandomEmptyCell'   : findRandomEmptyCell,
@@ -208,6 +221,7 @@ Board = function() {
         'boardAt'               : boardAt,
         'getPossibleMoves'      : getPossibleMoves,
         'draw'                  : draw,
+        'setEmpty'               : setEmpty,
     };
 
 };

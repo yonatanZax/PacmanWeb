@@ -5,15 +5,15 @@
 // settings variables
 function generateRandomStart() {
     return {
-    up_key : 'ArrowUp',
-    down_key : 'ArrowDown',
-    left_key : 'ArrowLeft',
-    right_key : 'ArrowRight',
-    pill_number : 50 + Math.floor(Math.random() * 41), // return a number between 50-90
-    time_seconds : 60 + Math.floor(Math.random() * 120),
-    monster_number : 1 + Math.floor(Math.random() * 3), // return a number between 1-3
-    tick : 0,
-    lives : 3,
+        up_key : 'ArrowUp',
+        down_key : 'ArrowDown',
+        left_key : 'ArrowLeft',
+        right_key : 'ArrowRight',
+        pill_number : 50 + Math.floor(Math.random() * 41), // return a number between 50-90
+        time_seconds : 60 + Math.floor(Math.random() * 120),
+        monster_number : 1 + Math.floor(Math.random() * 3), // return a number between 1-3
+        tick : 0,
+        lives : 3,
     }
 }
 
@@ -52,7 +52,7 @@ function settings_randomValues() {
 
 
 
-function getKey(event,direction) {
+function getKey(event, direction) {
 
     var code = event.keyCode;         // Get the Unicode value
     var keyValue = String.fromCharCode(code);    // Convert the value into a character
@@ -69,11 +69,8 @@ document.addEventListener('keydown', function(event){
 
 
     if ( currentDirection != null){
-        var keycode = event.which || event.keyCode;
-        var keyValue = String.fromCharCode(keycode); // Convert the value into a character
+        var keyValue = event.key;
 
-        if (keycode < 47)
-            keyValue = specialValue(keycode,event);
 
         // var elmBtn = document.getElementById("settings_" + currentDirection + "Key");
         // elmBtn.innerHTML = keyValue;
@@ -91,6 +88,10 @@ document.addEventListener('keydown', function(event){
 
 
 function setCurDirection( direction){
+    document.getElementById("settings_rightKey").style.background='yellow';
+    document.getElementById("settings_leftKey").style.background='yellow';
+    document.getElementById("settings_upKey").style.background='yellow';
+    document.getElementById("settings_downKey").style.background='yellow';
     document.getElementById("settings_" + direction + "Key").style.background='#00cc00';
     currentDirection = direction;
 }

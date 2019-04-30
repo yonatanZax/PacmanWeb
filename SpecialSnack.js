@@ -1,32 +1,32 @@
 SpecialSnack = function (game, map, colour, id) {
 
-    var position = null,
-        oldPos = null,
-        id = id,
-        alive = true;
+    var position  = null,
+        oldPos    = null,
+        id        = id,
+        alive     = true;
 
 
-    function getPossibleMoves() {
+    function getPossibleMoves(){
         var possibleMoves = map.getPossibleMoves(position.i, position.j);
-        if (oldPos === null || possibleMoves.length === 1) {
+        if (oldPos === null || possibleMoves.length === 1){
             return possibleMoves;
         }
-        possibleMoves = possibleMoves.filter(function (value, index, arr) {
+        possibleMoves = possibleMoves.filter(function(value, index, arr){
             return value.i !== oldPos.i || value.j !== oldPos.j;
         });
         return possibleMoves;
     }
 
-    function getOldPosition() {
+    function getOldPosition(){
         return oldPos;
     }
 
-    function setPosition(nPosition) {
+    function setPosition(nPosition){
         oldPos = position;
         position = nPosition;
     }
 
-    function draw(cxt) {
+    function draw(cxt){
         var center = new Object();
 
         /*    Draw as Image    */
@@ -50,11 +50,11 @@ SpecialSnack = function (game, map, colour, id) {
     }
 
 
-    function isAlive() {
+    function isAlive(){
         return alive;
     }
 
-    function eatSnack() {
+    function eatSnack(){
         alive = false;
     }
 
@@ -69,7 +69,7 @@ SpecialSnack = function (game, map, colour, id) {
         eatable = null;
         position = new Object();
         // console.log(id);
-        switch (id) {
+        switch(id){
             case 0:
                 position.i = 1;
                 position.j = 1;
@@ -97,11 +97,11 @@ SpecialSnack = function (game, map, colour, id) {
         return (game.getTick() - tick);
     }
 
-    function getI() {
+    function getI(){
         return position.i;
     }
 
-    function getJ() {
+    function getJ(){
         return position.j;
     }
 
@@ -113,7 +113,7 @@ SpecialSnack = function (game, map, colour, id) {
             } else {
                 return "#0000BB";
             }
-        } else if (eaten) {
+        } else if(eaten) {
             return "#222";
         }
         return colour;
@@ -121,12 +121,12 @@ SpecialSnack = function (game, map, colour, id) {
 
 
     return {
-        'eatSnack': eatSnack,
-        'isAlive': isAlive,
-        "reset": reset,
-        "draw": draw,
-        'getI': getI,
-        'getJ': getJ,
+        'eatSnack'    : eatSnack,
+        'isAlive'     : isAlive,
+        "reset"       : reset,
+        "draw"        : draw,
+        'getI'        : getI,
+        'getJ'        : getJ,
         'getOldPosition': getOldPosition,
         'setPosition': setPosition,
         'getPossibleMoves': getPossibleMoves,
