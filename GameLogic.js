@@ -23,9 +23,10 @@ var NONE        = 4,
     DYING       = 10;
 
 var  heightStep,
-     widthStep  ;
+    widthStep  ;
 
-var pacmanDirection = 'right';
+var pacmanDirection = 'right',
+    gameTime;
 
 function getTick(){
     return tick;
@@ -34,24 +35,25 @@ function getTick(){
 function Start() {
     score = 0;
     tick = 0;
-    generateRandomStart();
+    // generateRandomStart();
     pac_color = "yellow";
     // var food_remain = pill_number;
+    lives = 3;
     start_time = new Date();
     // Assign PACMAN location
     board = Board();
     board.initBoard();
     setHeightWidthStep();
-
+    gameTime = time_seconds;
     specialSnack = SpecialSnack({"getTick":getTick}, board,'black', 3);
     setCharactersLocations();
 
     keysDown = {};
     addEventListener("keydown", function (e) {
-        keysDown[e.code] = true;
+        keysDown[e.key] = true;
     }, false);
     addEventListener("keyup", function (e) {
-        keysDown[e.code] = false;
+        keysDown[e.key] = false;
     }, false);
     if (interval !== null){
         clearInterval(interval);
@@ -81,16 +83,22 @@ function setCharactersLocations(){
  * @return {number}
  */
 function GetKeyPressed() {
-    if (keysDown['ArrowUp']) {
+
+    // Todo - change to global values
+    // if (keysDown['ArrowUp']) {
+    if (keysDown[up_key]) {
         return 1;
     }
-    if (keysDown['ArrowDown']) {
+    // if (keysDown['ArrowDown']) {
+    if (keysDown[down_key]) {
         return 2;
     }
-    if (keysDown['ArrowLeft']) {
+    // if (keysDown['ArrowLeft']) {
+    if (keysDown[left_key]) {
         return 3;
     }
-    if (keysDown['ArrowRight']) {
+    // if (keysDown['ArrowRight']) {
+    if (keysDown[right_key]) {
         return 4;
     }
 }
@@ -104,6 +112,7 @@ function Draw() {
     context.clearRect(0, 0, canvas.width, canvas.height); //clean board
     lblScore.value = score;
     lblTime.value = time_elapsed;
+    lblLives.value = lives;
     // change height ad width in case it was changed
     setHeightWidthStep();
 
@@ -126,29 +135,29 @@ function drawPacMan(context){
     center.x = shape.i * widthStep + widthStep / 2;
     center.y = shape.j * heightStep + heightStep / 2;
     context.beginPath();
-    if(pacmanDirection === 'up'){
-        context.arc(center.x, center.y, widthStep / 2,  (1.50 +.15) % 2 * Math.PI, (1.50 +1.85) % 2 * Math.PI); // half circle
+    if (pacmanDirection === 'up') {
+        context.arc(center.x, center.y, widthStep / 2, (1.50 + .15) % 2 * Math.PI, (1.50 + 1.85) % 2 * Math.PI); // half circle
         context.lineTo(center.x, center.y);
         context.fillStyle = pac_color; //color
         context.fill();
         context.beginPath();
         context.arc(center.x -12, center.y -3, 4, 0, 2 * Math.PI); // circle
-    }else if (pacmanDirection === 'down'){
+    } else if (pacmanDirection === 'down') {
         context.arc(center.x, center.y, widthStep / 2, (0.5 + 0.15) % 2 * Math.PI, (0.5 + 1.85) % 2 * Math.PI); // half circle
         context.lineTo(center.x, center.y);
         context.fillStyle = pac_color; //color
         context.fill();
         context.beginPath();
         context.arc(center.x + 12, center.y +3, 4, 0, 2 * Math.PI); // circle
-    }else if(pacmanDirection === 'right'){
-        context.arc(center.x, center.y, widthStep / 2, (0 + 0.15) % 2 * Math.PI, (0 + 1.85) % 2  * Math.PI); // half circle
+    } else if (pacmanDirection === 'right') {
+        context.arc(center.x, center.y, widthStep / 2, (0 + 0.15) % 2 * Math.PI, (0 + 1.85) % 2 * Math.PI); // half circle
         context.lineTo(center.x, center.y);
         context.fillStyle = pac_color; //color
         context.fill();
         context.beginPath();
         context.arc(center.x + 3, center.y - 12, 4, 0, 2 * Math.PI); // circle
-    }else if (pacmanDirection === 'left'){
-        context.arc(center.x, center.y, widthStep / 2, (1 + 0.15) % 2* Math.PI, (1 + 1.85) % 2 * Math.PI); // half circle
+    } else if (pacmanDirection === 'left') {
+        context.arc(center.x, center.y, widthStep / 2, (1 + 0.15) % 2 * Math.PI, (1 + 1.85) % 2 * Math.PI); // half circle
         context.lineTo(center.x, center.y);
         context.fillStyle = pac_color; //color
         context.fill();
@@ -169,7 +178,7 @@ function moveGhosts(){
         var minDistance = 10000;
         var chosenMove ;
         // find minimum distance
-        for ( var j = 0; j < possibleMoves.length; j++){
+        for (var j = 0; j < possibleMoves.length; j++){
             if ( Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j) <= minDistance){
                 minDistance = Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j);
             }
@@ -188,33 +197,33 @@ function moveGhosts(){
 
 function moveSpecialSnack(){
     var possibleMoves = specialSnack.getPossibleMoves();
-    // var index = Math.floor(Math.random() * (possibleMoves.length));
-    // var chosenMove = possibleMoves[index];
-    // specialSnack.setPosition(chosenMove);
-
-
-    var bestMoves = new Array();
-    var minDistance = 10000;
-    var chosenMove ;
-    for ( var j = 0; j < possibleMoves.length; j++){
-        if ( Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j) <= minDistance){
-            minDistance = Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j);
-        }
-    }
-    // take all the moves with minimum distance
-    for ( var j = 0; j < possibleMoves.length; j++){
-        if ( Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j) === minDistance){
-            bestMoves.push(possibleMoves[j]);
-        }
-    }
-    chosenMove = bestMoves[Math.floor(Math.random() * bestMoves.length)];
+    var index = Math.floor(Math.random() * (possibleMoves.length));
+    var chosenMove = possibleMoves[index];
     specialSnack.setPosition(chosenMove);
+
+
+    // var bestMoves = new Array();
+    // var minDistance = 10000;
+    // var chosenMove ;
+    // for ( var j = 0; j < possibleMoves.length; j++){
+    //     if ( Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j) <= minDistance){
+    //         minDistance = Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j);
+    //     }
+    // }
+    // // take all the moves with minimum distance
+    // for ( var j = 0; j < possibleMoves.length; j++){
+    //     if ( Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j) === minDistance){
+    //         bestMoves.push(possibleMoves[j]);
+    //     }
+    // }
+    // chosenMove = bestMoves[Math.floor(Math.random() * bestMoves.length)];
+    // specialSnack.setPosition(chosenMove);
 
 }
 
 
 function UpdatePosition() {
-    board.getBoard()[shape.i][shape.j] = EMPTY;
+    var isGameOver = board.setEmpty(shape.i, shape.j);
 
     tick++;
 
@@ -241,8 +250,7 @@ function UpdatePosition() {
         if (shape.i > 0 && board.boardAt(shape.i - 1, shape.j) !== WALL) {
             oldPos = myClone(shape);
             shape.i--;
-        }
-        else if (shape.i - 1 < 0 && board.boardAt(board.getBoard().length - 1, shape.j) !== WALL){
+        } else if (shape.i - 1 < 0 && board.boardAt(board.getBoard().length - 1, shape.j) !== WALL) {
             // Move Between sides.
             oldPos = myClone(shape);
             shape.i = board.getBoard().length - 1;
@@ -253,8 +261,7 @@ function UpdatePosition() {
         if (shape.i < board.getBoard().length - 1 && board.boardAt(shape.i + 1, shape.j) !== WALL) {
             oldPos = myClone(shape);
             shape.i++;
-        }
-        else if (shape.i === board.getBoard().length - 1 && board.boardAt(0, shape.j) !== WALL){
+        } else if (shape.i === board.getBoard().length - 1 && board.boardAt(0, shape.j) !== WALL) {
             // Move Between sides.
             oldPos = myClone(shape);
             shape.i = 0;
@@ -266,7 +273,7 @@ function UpdatePosition() {
     }
     // board.getBoard()[shape.i][shape.j] = 2;
     var currentTime = new Date();
-    time_elapsed = (currentTime - start_time) / 1000;
+    time_elapsed = Math.round(gameTime - ((currentTime - start_time) / 1000)) + 1;
     // if (score >= 20 && time_elapsed <= 10) {
     //     pac_color = "green";
     // }
@@ -280,17 +287,34 @@ function UpdatePosition() {
     if(testGhostHit()){
         lives--;
         if (lives === 0){
-            window.alert("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
-            Start();
-        }
-        else{
-            window.alert("I guess this is not the reality you win.");
+            ShowAlert("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD", Start);
+            // Start();
+        } else {
+            ShowAlert("I guess this is not the reality you win.", setCharactersLocations);
             score -= 10;
-            setCharactersLocations();
+            // setCharactersLocations();
         }
+    }
+    if(isGameOver){
+        // TODO set the game is done because all the pills have been eaten
+        ShowAlert("All Gems were consumed.", setCharactersLocations);
+        // setCharactersLocations();
+    }
+    if (time_elapsed < 0){
+        // TODO - do something about end of time
+        ShowAlert("Time has run out.", Start);
+        // Start();
     }
 
 }
+
+function ShowAlert(text, callback){
+    gameTime = time_elapsed;
+    window.alert(text, callback);
+    start_time = new Date();
+}
+
+
 
 function gameFinished(){
     // TODO - do what it say it suppose to do
@@ -305,7 +329,7 @@ function testHit(character){
 function testGhostHit(){
     for (var i = 0; i < ghosts.length; i++){
         if (testHit(ghosts[i])){
-            // return true;
+            return true;
         }
     }
     return false;
@@ -319,3 +343,32 @@ function testSpecialSnackHit(){
 function myClone(src) {
     return Object.assign({}, src);
 }
+
+// var currentCallback;
+//
+// // override default browser alert
+// window.alert = function(msg, callback){
+//
+//     $('.message').text(msg);
+//     $('.customAlert').css('animation', 'fadeIn 0.3s linear');
+//     $('.customAlert').css('display', 'inline');
+//     setTimeout(function(){
+//         $('.customAlert').css('animation', 'none');
+//     }, 300);
+//     currentCallback = callback;
+// };
+//
+// $(function(){
+//
+//     // add listener for when our confirmation button is clicked
+//     $('.confirmButton').click(function(){
+//         $('.customAlert').css('animation', 'fadeOut 0.3s linear');
+//         setTimeout(function(){
+//             $('.customAlert').css('animation', 'none');
+//             $('.customAlert').css('display', 'none');
+//         }, 300);
+//         currentCallback();
+//     });
+//
+//     $('.customAlert').css('animation', 'fadeOut 0.3s linear');
+// });

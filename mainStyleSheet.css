@@ -1,14 +1,8 @@
-
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 
 body {
     margin: 20px;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-html, body {
-    width:  100%;
-    height: 100%;
-    margin: 0;
 }
 
 .frame{
@@ -16,8 +10,8 @@ html, body {
     height: 100%;
 }
 #canvas {
-    width: 55%;
-    height: 70%;
+    width: 35%;
+    height: 35%;
 }
 
 .toolbar {
@@ -27,9 +21,12 @@ html, body {
     margin-right: 1px;
 }
 
+
+
+
 .myfooter{
     background-color:black;
-    padding: 20px;
+    padding: 10px;
     padding-right: 1px;
     margin-right: 1px;
 
@@ -68,8 +65,31 @@ html, body {
 }
 
 
+td{
+    width: 200px;
+}
+
+.inputField{
+    width: 50%;
+    padding: 5%;
+    margin: 5px 10px 10px 20px;
+    display: inline-block;
+    font-weight: bold;
 
 
+}
+
+
+
+.keyboardBtn{
+    text-align: center;
+    vertical-align: middle;
+    border-style: solid;
+    font-size: 14px;
+    font-weight: bold;
+    width: 120px;
+    height: 120px;
+}
 
 
 
@@ -82,3 +102,78 @@ html, body {
 }
 
 
+
+/*@import url(https://fonts.googleapis.com/css?family=Noto+Sans);*/
+
+
+/*.customAlert{*/
+
+/*    display: none;*/
+/*    position: fixed;*/
+/*    max-width: 25%;*/
+/*    min-width: 250px !important;*/
+/*    min-height: 20%;*/
+/*    height: 200px;*/
+/*    left: 50%;*/
+/*    top: 50%;*/
+/*    padding: 10px;*/
+/*    box-sizing: border-box;*/
+/*    margin-left: -12.5%;*/
+/*    margin-top: -5.2%;*/
+/*    background: #088A68;*/
+
+/*    @media all and (max-width: 1300px){*/
+/*        .message{*/
+/*            font-size: 14px !important;*/
+/*        }*/
+/*        input[type='button']{*/
+/*            height: 15% !important;*/
+/*        }*/
+/*    }*/
+
+/*    .message{*/
+/*        padding: 5px;*/
+/*        color: white;*/
+/*        font-size: 14px;*/
+/*        line-height: 20px;*/
+/*        text-align: justify;*/
+/*    }*/
+
+/*    input[type='button']{*/
+/*        position: absolute;*/
+/*        top: 100%;*/
+/*        left: 50%;*/
+/*        width: 50%;*/
+/*        height: 36px;*/
+/*        margin-top: -45px;*/
+/*        margin-left: -25%;*/
+/*        outline: 0;*/
+/*        border: 0;*/
+/*        background: #04B486;*/
+/*        color: white;*/
+/*        :hover{*/
+/*            transition: 0.3s;*/
+/*            cursor: pointer;*/
+/*            background: lighten(#04B486, 5%);*/
+/*        }*/
+/*    }*/
+/*}*/
+
+
+/*@keyframes fadeOut{*/
+/*    from{*/
+/*        opacity: 1;*/
+/*    }*/
+/*    to{*/
+/*        opacity: 0;*/
+/*    }*/
+/*}*/
+
+/*@keyframes fadeIn{*/
+/*    from{*/
+/*        opacity: 0;*/
+/*    }*/
+/*    to{*/
+/*        opacity: 1;*/
+/*    }*/
+/*}*/

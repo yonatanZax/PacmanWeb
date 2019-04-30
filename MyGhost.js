@@ -7,7 +7,6 @@ MyGhost = function (game, map, colour, pId) {
         eatable   = null,
         eaten     = null;
 
-    var animationInterval;
 
     function getPossibleMoves(){
         var possibleMoves = map.getPossibleMoves(position.i, position.j);
@@ -27,6 +26,19 @@ MyGhost = function (game, map, colour, pId) {
     function setPosition(nPosition){
         oldPos = position;
         position = nPosition;
+        if (oldPos.i < position.i){
+            direction = 'right';
+        }
+        else if(oldPos.i > position.i){
+            direction = 'left';
+        }
+        else if(oldPos.j < position.j){
+            direction = 'down';
+        }
+        else if(oldPos.j > position.j){
+            direction = 'up'
+        }
+
     }
 
     function draw(cxt){
@@ -38,6 +50,70 @@ MyGhost = function (game, map, colour, pId) {
         cxt.fillStyle = "black"; //color
         cxt.fill();
     }
+
+    // function draw(cxt){
+    //     var center = {};
+    //     context.clearRect(x - widthStep/2 - 2, y - heightStep/2 - 2, widthStep + 2, heightStep + 2);
+    //
+    //     center.x = position.i * widthStep + widthStep / 2;
+    //     center.y = position.j * heightStep + heightStep / 2;
+    //     x = center.x;
+    //     y = center.y;
+    //     if (direction !== null){
+    //         if (direction === 'left'){
+    //             speedX = - widthStep / 50;
+    //             speedY = 0;
+    //         }
+    //         else if(direction === 'right'){
+    //             speedX = widthStep / 50;
+    //             speedY = 0;
+    //         }
+    //         else if(direction === 'up'){
+    //             speedY = - heightStep/50;
+    //             speedX = 0;
+    //         }
+    //         else if(direction === 'down'){
+    //             speedY = heightStep/50;
+    //             speedX = 0;
+    //         }
+    //     }
+    //     // speedX = widthStep / 50;
+    //     // speedY = heightStep/50;
+    //     animationIntervalTime = 5;
+    //     if (interval !== null){
+    //         clearInterval(animationInterval);
+    //     }
+    //     animationInterval = setInterval(updateCharacter, animationIntervalTime)
+    // }
+    // var x = 0,
+    //     y = 0,
+    //     speedX = 0,
+    //     speedY = 0,
+    //     animationInterval = null,
+    //     animationIntervalTime;
+    //
+    //
+    // function clear(){
+    //     context.clearRect(x - widthStep/2 - 2, y - heightStep/2 - 2, widthStep + 2, heightStep + 2);
+    // }
+    //
+    // function newPos() {
+    //     x += speedX;
+    //     y += speedY;
+    // }
+    //
+    // function update(){
+    //     context.beginPath();
+    //     context.rect(x - widthStep/2, y - heightStep/2, widthStep, heightStep);
+    //     context.fillStyle = "black"; //color
+    //     context.fill();
+    // }
+    //
+    // function updateCharacter() {
+    //     clear();
+    //     newPos();
+    //     update();
+    // }
 
     function isVulnerable() {
         return eatable !== null;
