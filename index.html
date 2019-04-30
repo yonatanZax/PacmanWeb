@@ -165,30 +165,33 @@
                 <table>
                     <tr>
                         <td><label><b>User name</b></label></td>
-                <td><input id="userName_register" class="loginInput" type="text" placeholder="Enter username" name="userName"
-                           pattern=".{8,}"   required title="At least 8 chars for User name"></td>
+                <td><input id="userName_register" class="loginInput" type="text" placeholder="Enter username" name="userName"></td>
                     </tr>
 
                     <tr>
                         <td><br><label><b>Password</b></label></td>
                         <td><input id="password_register" class="loginInput" type="password" placeholder="Enter Password" name="password" required
-                                   pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" title="Must contain at least one number and one letter, and at least 8 or more characters"></td>
+                                   pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/" title="Must contain at least one number, one letter, and at least 8 or more characters"></td>
                     </tr>
 
                     <tr>
                         <td><br><label><b>First name</b></label></td>
-                        <td><input id="fName_register" class="loginInput" type="text" placeholder="Enter first name" name="fName" required></td>
+                        <td><input id="fName_register" class="loginInput" type="text" placeholder="Enter first name" name="fName" required
+                            pattern="^[^0-9]+$" title="Numbers are not allowed"></td>
                     </tr>
 
                     <tr>
                         <td><br><label><b>Last name</b></label></td>
-                        <td><input id="lName_register" class="loginInput" type="text" placeholder="Enter last name" name="lName" required></td>
+                        <td><input id="lName_register" class="loginInput" type="text" placeholder="Enter last name" name="lName" required
+                                   pattern="^[^0-9]+$" title="Numbers are not allowed"></td>
                     </tr>
 
                     <tr>
                         <td><br><label><b>Email</b></label></td>
                         <td><input id="email_register" class="loginInput" type="email" placeholder="Enter Email" name="email" required
-                                   pattern="/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/" title="Must be a valid email"></td>
+                                   title="Must be a valid email"></td>
+<!--                                    title="Must be a valid email"></td>-->
+
                     </tr>
 
                     <tr>
@@ -200,11 +203,9 @@
 
 
                 <div class="center">
-                    <button type="button" onclick="document.getElementById('registerDiv').style.display='none'"
-                            class="cancelbtn">Cancel
-                    </button>
-<!--                    <button id="registerBtn" class="submitBtn">Sign Up</button>-->
-                    <button id="registerBtn" class="submitBtn" onclick="manageRegister()">Sign Up</button>
+                    <button type="button" onclick="document.getElementById('registerDiv').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button id="registerBtn" class="submitBtn">Sign Up</button>
+<!--                    <button id="registerBtn" class="submitBtn" onclick="manageRegister()">Sign Up</button>-->
                 </div>
             </div>
 

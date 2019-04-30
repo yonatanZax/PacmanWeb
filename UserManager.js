@@ -92,44 +92,76 @@ function addUserToList(newUser) {
     return false;
 }
 
+$(document).ready(function (event) {
+    $("#registerBtn").click(
 
-// $("#registerBtn").click(
-//     function (event) {
-//         var userNameValidation = $("#userName_register")[0].checkValidity();
-//         var passwordValidation = $("#password_register")[0].checkValidity();
-//         var emailValidation = $("#email_register")[0].checkValidity();
-//
-//         //validate if the pattern match
-//         if (userNameValidation && passwordValidation && emailValidation) {
-//
-//             var uName = $('#userName_register').val();
-//             var pass = $('#password_register').val();
-//             var fName = $('#fName_register').val();
-//             var lName = $('#lName_register').val();
-//             var email = $('#email_register').val();
-//
-//
-//             var birthbay = $('#birthday_register').val();
-//
-//             var newUserRegistration = new User({userName:uName,password:pass,
-//                 fName:fName, lName:lName,
-//                 email:email, birthday:birthbay
-//             });
-//             if(addUserToList(newUserRegistration)){
-//                 footer.innerHTML = "New user was created successfully";
-//                 document.getElementById('registerDiv').style.display='none'
-//             }else{
-//                 alert("Incorrect values - registration");
-//             }
-//
-//
-//         }else {
-//             $("#userName_register")[0].setCustomValidity("Please enter at least 8 characters.");
-//             var isValid = $('#userName_register')[0].reportValidity();
-//             event.preventDefault();
-//         }
-//
-//     });
+        function () {
+            // var userNameValidation = $("#userName_register")[0].checkValidity();
+            var fNameValidation = $("#fName_register")[0].checkValidity();
+            var lNameValidation = $("#lName_register")[0].checkValidity();
+
+
+            var passwordValidation = $("#password_register")[0].checkValidity();
+
+            //validate if the pattern match
+            if (passwordValidation && fNameValidation && lNameValidation) {
+            // if (userNameValidation && passwordValidation && emailValidation) {
+
+                var uName = $('#userName_register').val();
+                var pass = $('#password_register').val();
+                var fName = $('#fName_register').val();
+                var lName = $('#lName_register').val();
+                var email = $('#email_register').val();
+
+
+                var birthbay = $('#birthday_register').val();
+
+                var newUserRegistration = new User({userName:uName,password:pass,
+                    fName:fName, lName:lName,
+                    email:email, birthday:birthbay
+                });
+                if(addUserToList(newUserRegistration)){
+                    footer.innerHTML = "New user was created successfully";
+                    document.getElementById('registerDiv').style.display='none'
+                }else{
+                    alert("Incorrect values - registration");
+                }
+
+
+            }else {
+
+
+
+                if (!passwordValidation) {
+                    $("#password_register")[0].setCustomValidity("Please enter at least 8 characters.");
+                    $('#password_register')[0].reportValidity();
+
+                }
+
+                if (!fNameValidation) {
+                    $("#fName_register")[0].setCustomValidity("Numbers are not allowed");
+                    $('#fName_register')[0].reportValidity();
+
+                }
+
+                if (!lNameValidation) {
+                    $("#lName_register")[0].setCustomValidity("Numbers are not allowed");
+                    $('#lName_register')[0].reportValidity();
+
+                }
+
+
+
+
+
+
+
+                event.preventDefault();
+            }
+
+        });
+});
+
 
 
 

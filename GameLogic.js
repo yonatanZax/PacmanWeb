@@ -47,10 +47,10 @@ function Start() {
 
     keysDown = {};
     addEventListener("keydown", function (e) {
-        keysDown[e.code] = true;
+        keysDown[e.keyCode] = true;
     }, false);
     addEventListener("keyup", function (e) {
-        keysDown[e.code] = false;
+        keysDown[e.keyCode] = false;
     }, false);
     if (interval !== null) {
         clearInterval(interval);
@@ -82,16 +82,16 @@ function GetKeyPressed() {
 
     // Todo - change to global values
 
-    if (keysDown['ArrowUp']) {
+    if (keysDown[up_key]) {
         return 1;
     }
-    if (keysDown['ArrowDown']) {
+    if (keysDown[down_key]) {
         return 2;
     }
-    if (keysDown['ArrowLeft']) {
+    if (keysDown[left_key]) {
         return 3;
     }
-    if (keysDown['ArrowRight']) {
+    if (keysDown[right_key]) {
         return 4;
     }
 }
@@ -105,6 +105,7 @@ function Draw() {
     context.clearRect(0, 0, canvas.width, canvas.height); //clean board
     lblScore.value = score;
     lblTime.value = time_elapsed;
+
     // change height ad width in case it was changed
     setHeightWidthStep();
 
@@ -219,26 +220,26 @@ function UpdatePosition() {
 
     tick++;
 
-    var x = GetKeyPressed();
+    var pressedKey = GetKeyPressed();
     moveGhosts();
     if (specialSnack.isAlive()) {
         moveSpecialSnack();
     }
-    if (x === 1) {
+    if (pressedKey === 1) {
         if (shape.j > 0 && board.boardAt(shape.i, shape.j - 1) !== WALL) {
             oldPos = myClone(shape);
             shape.j--;
         }
         pacmanDirection = 'up';
     }
-    if (x === 2) {
+    if (pressedKey === 2) {
         if (shape.j < board.getBoard()[0].length && board.boardAt(shape.i, shape.j + 1) !== WALL) {
             oldPos = myClone(shape);
             shape.j++;
         }
         pacmanDirection = 'down';
     }
-    if (x === 3) {
+    if (pressedKey === 3) {
         if (shape.i > 0 && board.boardAt(shape.i - 1, shape.j) !== WALL) {
             oldPos = myClone(shape);
             shape.i--;
@@ -249,7 +250,7 @@ function UpdatePosition() {
         }
         pacmanDirection = 'left';
     }
-    if (x === 4) {
+    if (pressedKey === 4) {
         if (shape.i < board.getBoard().length - 1 && board.boardAt(shape.i + 1, shape.j) !== WALL) {
             oldPos = myClone(shape);
             shape.i++;
