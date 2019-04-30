@@ -2,7 +2,7 @@
 
 function switchContent(makeVisible) {
 
-    var contentList = ["welcome","game"];
+    var contentList = ["welcome","game","settings","loginDiv"];
 
     var makeHidden = contentList.filter(function (value) {
         return value!=makeVisible;
@@ -17,7 +17,8 @@ function switchContent(makeVisible) {
     var get = document.getElementById(makeVisible);
     get.className = "visible";
 
-
+    var footer = document.getElementById("footer");
+    footer.innerHTML = makeVisible;
 
 
 }
