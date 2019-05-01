@@ -289,6 +289,34 @@
 
             <hr>
 
+            <h3>Select Pacman</h3>
+
+            <table>
+                <tr>
+                    <td><img id="thanos_pacman_right" src="images/thanos_pacman_right.png" onclick="settings_changePac('thanos')" class="center" height="80" width="80" style="border-color: black; border-style: solid"></td>
+                    <td ><img id="spiderman_pacman_right" src="images/spiderman_pacman_right.png" onclick="settings_changePac('spiderman')" class="center" height="80" width="80" style="border-color: black;"></td>
+                    <td><img id="ironman_pacman_right" src="images/ironman_pacman_right.png" onclick="settings_changePac('ironman')" class="center" height="80" width="80" style="border-color: black;"></td>
+                    <td><img id="halk_pacman_right" src="images/halk_pacman_right.png" onclick="settings_changePac('halk')" class="center" height="80" width="80" style="border-color: black;"></td>
+
+                </tr>
+
+            </table>
+
+
+
+
+
+
+            <hr>
+
+
+
+
+
+
+
+
+
             <!--            Settings table               -->
 
             <table>
@@ -575,6 +603,8 @@
     var pill_number ; // return a number between 50-90
     var time_seconds = 60;
     var monster_number; // return a number between 1-3
+
+    var pacImgName = "thanos";
 
     var ghosts = [];
     var specialSnack;

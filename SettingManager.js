@@ -139,6 +139,27 @@ function saveSettings() {
 
 
 
+function settings_changePac(pac) {
+    var pacList = ["thanos", "spiderman", "ironman", "halk"];
+
+    var unSelect = pacList.filter(function (value) {
+        return value!=pac;
+    });
+
+    for (var i = 0; i < unSelect.length ; i++){
+        var pacOut = document.getElementById(unSelect[i] + "_pacman_right");
+        pacOut.style.borderStyle = "none";
+    }
+
+    var pacIn = document.getElementById(pac + "_pacman_right");
+    pacIn.style.borderStyle = "solid";
+
+    pacImgName = pac;
+}
+
+
+
+
 
 
 

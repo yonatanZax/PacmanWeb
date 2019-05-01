@@ -180,13 +180,13 @@ function drawPacMan(context){
     context.beginPath();
 
     /*    Draw as Image    */
-    const ghostImag = new Image();
-    ghostImag.src = 'images/thanos_pacman_' + pacmanDirection + '.png';
+    const pacImag = new Image();
+    pacImag.src = 'images/' + pacImgName + '_pacman_' + pacmanDirection + '.png';
     var xPos = center.x - widthStep / 2;
     var yPos = center.y - heightStep / 2;
     var imgWidth = widthStep;
     var imgHeight = heightStep;
-    context.drawImage(ghostImag, xPos, yPos, imgWidth  , imgHeight + 10);
+    context.drawImage(pacImag, xPos, yPos, imgWidth  , imgHeight);
     context.fill();
 
 
