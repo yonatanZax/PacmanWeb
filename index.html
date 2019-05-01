@@ -104,7 +104,7 @@
 
 
     <div align="center">
-        <button class="animation_btn" onclick="document.getElementById('loginDiv').style.display='block'" style="width:auto; border-color: black; border-style: solid" ><span>Login</span></button>
+        <button class="animation_btn" onclick="royLogin()" style="width:auto; border-color: black; border-style: solid" ><span>Login</span></button>
         <button class="animation_btn" onclick="document.getElementById('registerDiv').style.display='block'" style="width:auto; border-color: black; border-style: solid"><span>Register</span></button>
     </div>
 
@@ -425,6 +425,12 @@
 
     function showWelcome() {
         switchContent("welcome");
+    }
+
+
+    function royLogin(){
+        document.getElementById('loginDiv').style.display='block' ;
+        document.getElementById('userName_login').focus();
     }
 
     function showLogin() {

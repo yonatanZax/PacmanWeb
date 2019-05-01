@@ -57,13 +57,12 @@ MyGhost = function (game, map, colour, pId) {
         var yPos = center.y - heightStep / 2;
         var imgWidth = widthStep;
         var imgHeight = heightStep;
-
-
         cxt.drawImage(ghostImag, xPos, yPos, imgWidth - 10, imgHeight);
 
         // cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
         // cxt.fillStyle = "black"; //color
         cxt.fill();
+
     }
 
     // function draw(cxt){

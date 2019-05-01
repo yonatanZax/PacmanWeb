@@ -48,9 +48,10 @@ function  play() {
 function ShowAlert(text){
     pause();
     bootbox.alert({
+        title: "Message",
         message: text,
         size: 'small',
-        className: 'default',
+        className: 'modal-dialog',
         callback : play
     });
 
