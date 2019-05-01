@@ -125,14 +125,7 @@ Board = function() {
             moves.push({'i': i,
                             'j': j+1});
         }
-        // if (j - 1 < 0 && (boardAt(i,j-1) !== WALL && boardAt(i,j-1) !== BLOCK)){
-        //     moves.push({'i': i,
-        //         'j': j-1});
-        // }
-        // if (i + 1 === board[0].length && (boardAt(i+1,j) !== WALL && boardAt(i+1,j) !== BLOCK)){
-        //     moves.push({'i': i+1,
-        //         'j': j});
-        // }
+
 
         return moves;
 
@@ -197,25 +190,6 @@ Board = function() {
 
                 }
                 else if (board[i][j] === WALL) {
-
-
-                    // /*    Draw as Image    */
-                    // const wallImg = new Image();
-                    // wallImg.src = 'images/wall.png';
-                    //
-                    // context.beginPath();
-                    //
-                    // var xPos = center.x - widthStep / 2;
-                    // var yPos = center.y - heightStep / 2;
-                    // var imgWidth = widthStep;
-                    // var imgHeight = heightStep;
-                    //
-                    //
-                    // context.drawImage(wallImg, xPos, yPos, imgWidth, imgHeight);
-                    //
-                    //
-                    // context.fill();
-
 
 
                     context.beginPath();

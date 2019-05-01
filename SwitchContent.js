@@ -2,7 +2,7 @@
 
 function switchContent(makeVisible) {
 
-    var contentList = ["welcome","game","settings","loginDiv"];
+    var contentList = ["welcome","game","settings","loginDiv","game_over"];
 
     var makeHidden = contentList.filter(function (value) {
         return value!=makeVisible;
@@ -21,6 +21,8 @@ function switchContent(makeVisible) {
     footer.innerHTML = makeVisible;
 
     document.getElementById('loginDiv').style.display='none';
+
+    pause();
 
 
 }

@@ -34,6 +34,10 @@ input:invalid {
     padding-right: 1px;
     margin-right: 1px;
 
+    position: fixed;
+    bottom: 0;
+    width: 96%;
+
 }
 
 
@@ -149,10 +153,6 @@ td{
     right: 0;
 }
 
-
-
-
-
 /* Fonts */
 
 @font-face {
@@ -161,10 +161,14 @@ td{
 }
 
 
+
+
+
 .gameDigital{
     width: 10%;
     padding: 0.5%;
     margin: 5px 10px 10px 20px;
 }
+
 
 
