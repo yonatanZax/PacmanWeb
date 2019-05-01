@@ -207,10 +207,11 @@
         <div class="modal-popup-header">
                         <span onclick="document.getElementById('aboutModal').style.display='none'" class="close"
                               title="Close Modal">X</span>
-            <h2>About</h2>
+            <h2>Created by Roy Dor and Yonatan Zax</h2>
         </div>
         <div class="modal-popup-body">
-            <p>Body text</p>
+            <p>This is the second assignment in the course "Internet Programming Environments"</p>
+            <p>In this project we've learned: HTML, CSS, JS and also jQuery</p>
         </div>
 
     </div>
@@ -455,7 +456,7 @@
 
 
 <footer class="myfooter">
-    <p id="footer" style="color: white">Footer</p>
+    <h3 id="footer" class="center" style="color: white">&copy 2019 Created by Roy Dor and Yonatan Zax | Have fun:)</h3>
 </footer>
 
 
@@ -528,8 +529,9 @@
             // switchContent("game");
             // Start();
         }else {
-            var footer = document.getElementById("footer");
-            footer.innerHTML = "Please sign in\ register before playing";
+            var user_display = document.getElementById("userName_display");
+
+            user_display.innerHTML = "Please sign in\ register before playing";
 
         }
     }

@@ -17,9 +17,6 @@ function switchContent(makeVisible) {
     var get = document.getElementById(makeVisible);
     get.className = "visible";
 
-    var footer = document.getElementById("footer");
-    footer.innerHTML = makeVisible;
-
     document.getElementById('loginDiv').style.display='none';
 
     pause();
