@@ -35,6 +35,7 @@ async function pause(){
     STATE = PAUSE;
     gameTime = time_elapsed;
     clearIntervalsArr();
+    myAudio.pause();
 }
 
 function  play() {
@@ -43,17 +44,13 @@ function  play() {
     clearInterval(interval);
     interval = window.setInterval(UpdatePosition, 250);
     intervalsArr.push(interval);
+    myAudio.play();
 }
 
 function ShowAlert(text){
     pause();
-    bootbox.alert({
-        title: "Message",
-        message: text,
-        size: 'small',
-        className: 'modal-dialog',
-        callback : play
-    });
+    window.alert(text);
+    play();
 
 }
 
@@ -69,6 +66,8 @@ async function clearIntervalsArr(){
 }
 
 async function Start() {
+    myAudio = document.getElementById("myAudio");
+    myAudio.currentTime = 0;
     score = 0;
     tick = 0;
     // generateRandomStart();
@@ -334,9 +333,6 @@ function UpdatePosition() {
 }
 
 
-
-
-
 function gameFinished(){
     // TODO - do what it say it suppose to do
 }
@@ -350,7 +346,7 @@ function testHit(character){
 function testGhostHit(){
     for (var i = 0; i < ghosts.length; i++){
         if (testHit(ghosts[i])){
-            return true;
+            // return true;
         }
     }
     return false;
@@ -364,4 +360,3 @@ function testSpecialSnackHit(){
 function myClone(src) {
     return Object.assign({}, src);
 }
-

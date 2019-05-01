@@ -149,10 +149,6 @@ td{
     right: 0;
 }
 
-
-
-
-
 /* Fonts */
 
 @font-face {
@@ -161,8 +157,14 @@ td{
 }
 
 
+
+
+
 .gameDigital{
     width: 10%;
     padding: 0.5%;
     margin: 5px 10px 10px 20px;
 }
+
+
+
