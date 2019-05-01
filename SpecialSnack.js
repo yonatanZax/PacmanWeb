@@ -28,11 +28,24 @@ SpecialSnack = function (game, map, colour, id) {
 
     function draw(cxt){
         var center = new Object();
+
+        /*    Draw as Image    */
+        const snackImg = new Image();
+        snackImg.src = 'images/thanos_glove.png';
+
         center.x = position.i * widthStep + widthStep / 2;
         center.y = position.j * heightStep + heightStep / 2;
         cxt.beginPath();
-        cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
-        cxt.fillStyle = "gold"; //color
+
+        var xPos = center.x - widthStep / 2;
+        var yPos = center.y - heightStep / 2;
+        var imgWidth = widthStep + 10;
+        var imgHeight = heightStep + 10;
+
+
+        cxt.drawImage(snackImg, xPos, yPos, imgWidth, imgHeight);
+        // cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
+        // cxt.fillStyle = "gold"; //color
         cxt.fill();
     }
 

@@ -15,15 +15,26 @@
     <script type="text/javascript" src="Board.js" ></script>
     <script type="text/javascript" src="SpecialSnack.js" ></script>
 
+<!--    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">-->
 
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+    <!-- Bootstrap 4 dependency -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+
+    <!-- bootbox code -->
+<!--    <script src="bootbox.min.js"></script>-->
+    <script src="bootbox.min.js"></script>
+<!--    <script src="bootbox.locales.min.js"></script>-->
+    <script src="bootbox.locales.min.js"></script>
+
+<!--    http://bootboxjs.com/examples.html-->
 
     <!-- Reference mousetrap from a local file -->
 <!--    <script src="mousetrap.min.js"></script>-->
 
     <!-- Or using a CDN -->
-    <script src="https://cdn.rawgit.com/ccampbell/mousetrap/825ce50c/mousetrap.min.js"></script>
 
 
     <!--        css files-->
@@ -47,13 +58,7 @@
 
 
 
-    <div class="toolbar">
-
-        <menu type="context" id="mymenu">
-            <menuitem label="Refresh" onclick="showWelcome();" style="color: white"></menuitem>
-            <!--        <menuitem label="Refresh" onclick="window.location.reload();" icon="ico_reload.png"></menuitem>-->
-
-        </menu>
+    <div class="toolbar" id="toolbar">
 
 
         <div style="float: left;">
@@ -61,12 +66,12 @@
             <button onclick="document.getElementById('aboutModal').style.display='block'" style="width:auto;">About</button>
             <!--        <button  onclick="showAbout()">About</button>-->
             <button onclick="setSettings()">Settings</button>
-            <button onclick="playGame()">EndGame</button>
+            <button onclick="playGame(event)">EndGame</button>
         </div>
 
 
 
-        <img src="images/Marvel-Pacman%20header.png" height="60" style="margin-left: 10%">
+        <img src="images/Marvel-Pacman%20header.png" width="30%" style="margin-left: 15%">
 
 
         <div style="float: right;">
@@ -90,23 +95,22 @@
 <!--/****   Welcome - login and registration    ****/-->
 
 <div id="welcome" class="visible frame" >
-    <br>
 
-    <img src="images/Marvel-Pacman-logo-bw.png" class="center">
+
+    <img src="images/Marvel-Pacman-logo-bw.png" class="center" height="280" width="340">
     <!--    <img src="images/Marvel-Pacman%20logo.png" class="center">-->
 
-    <br>
+
 
 
     <div align="center">
-        <button onclick="document.getElementById('loginDiv').style.display='block'" style="width:auto;">Login</button>
-        <button onclick="document.getElementById('registerDiv').style.display='block'" style="width:auto;">Register
-        </button>
+        <button class="animation_btn" onclick="document.getElementById('loginDiv').style.display='block'" style="width:auto; border-color: black; border-style: solid" ><span>Login</span></button>
+        <button class="animation_btn" onclick="document.getElementById('registerDiv').style.display='block'" style="width:auto; border-color: black; border-style: solid"><span>Register</span></button>
     </div>
 
 
     <div id="loginDiv" class="modal" style="background-color: white">
-         <span onclick="document.getElementById('loginDiv').style.display='none'" class="close">X</span>
+         <span onclick="document.getElementById('loginDiv').style.display='none',   document.getElementById('userName_login').focus();" class="close"></span>
 
 
             <div class="container">
@@ -119,7 +123,7 @@
 
                             </td>
                             <td>
-                                <input id="userName_login" class="loginInput" type="text" placeholder="Enter Username" name="userName">
+                                <input id="userName_login" class="loginInput" type="text" placeholder="Enter Username" name="userName" required>
                             </td>
                         </tr>
 
@@ -137,17 +141,11 @@
 
                     </table>
 
-                    <button type="button" onclick="document.getElementById('loginDiv').style.display='none'"
-                            class="cancelbtn">Cancel
-                    </button>
+                    <button type="button" onclick="document.getElementById('loginDiv').style.display='none'" class="cancelbtn">Cancel</button>
 <!--                    <button id="loginBtn" class="submitBtn">Login</button>-->
                     <button id="loginBtn" class="submitBtn" onclick="manageLogin();">Login</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
+
                 </div>
-
-
 
             </div>
 
@@ -165,13 +163,13 @@
                 <table>
                     <tr>
                         <td><label><b>User name</b></label></td>
-                <td><input id="userName_register" class="loginInput" type="text" placeholder="Enter username" name="userName"></td>
+                <td><input id="userName_register" class="loginInput" type="text" placeholder="Enter username" name="userName" required></td>
                     </tr>
 
                     <tr>
                         <td><br><label><b>Password</b></label></td>
                         <td><input id="password_register" class="loginInput" type="password" placeholder="Enter Password" name="password" required
-                                   pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/" title="Must contain at least one number, one letter, and at least 8 or more characters"></td>
+                                   pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Must contain at least one number, one letter, and at least 8 or more characters"></td>
                     </tr>
 
                     <tr>
@@ -329,21 +327,23 @@
                 </tr>
 
 
-                <!--                new row          -->
+
+            </table>
+
+            <table>
+                <tr>
+                    <td><label><b>5 Points</b></label></td>
+                    <td><input id="settings_5Points" class="inputField" type="color" value="#ff0000"></td>
+                </tr>
 
                 <tr>
-                    <td>
-                        <label><b>Pacman's color</b></label>
-                    </td>
+                    <td><label><b>15 Points</b></label></td>
+                    <td><input id="settings_15Points" class="inputField"  type="color" value="#ff0000"></td>
+                </tr>
 
-                    <td>
-                        <select class="inputField" name="Color">
-                            <option value="Red">Red</option>
-                            <option value="Blue">Blue</option>
-                            <option value="Green" selected>Green</option>
-                            <option value="Yellow">Yellow</option>
-                        </select>
-                    </td>
+                <tr>
+                    <td><label><b>25 Points</b></label></td>
+                    <td><input id="settings_25Points" class="inputField" type="color" value="#ff0000"></td>
                 </tr>
 
             </table>
@@ -362,24 +362,38 @@
 
 </div>
 
-<div class='customAlert'>
-    <p class='message'></p>
-    <input type='button' class='confirmButton' value='Ok'>
-</div>
+
+
 
 <!--/****   EndGame    ****/-->
 
 <div id="game" class="hidden">
 
-    <div class="center">
-        SCORE:
-        <input class="gameInput" id="lblScore" type="text"/>
 
-        TIME:
-        <input class="gameInput" id="lblTime" type="text"/>
+    <div id="player">
+        <audio autoplay hidden>
+<!--            <source src="/images/AvengersThemeSong.mp3" type="audio/mpeg">-->
+            If you're reading this, audio isn't supported.
+        </audio>
+    </div>
 
-        LIVES:
-        <input class="gameInput" id="lblLives" type="text"/>
+
+
+    <div class="center" style="margin-left: 35%">
+
+
+
+        <label class="inputField" style="font-family: digital_font"> SCORE: </label>
+        <label class="inputField" id="lblScore" style="font-family: digital_font"> 0 </label>
+
+
+        <label class="inputField" style="font-family: digital_font"> TIME: </label>
+        <label class="inputField" id="lblTime" style="font-family: digital_font"> 0 </label>
+
+
+        <label class="inputField" style="font-family: digital_font"> LIVES: </label>
+        <label class="inputField" id="lblLives" style="font-family: digital_font"> 0 </label>
+
     </div>
 
     <p class="tab"></p>
@@ -440,12 +454,12 @@
 
 
     user_db = {};
-    var aUser = new User({userName:"a",password:"a"});
+    var aUser = new User({userName:"a",password:"a",fName:'Pac',lName:'Man',email:"a@gmail.com",birthday:'2019-01-01'});
     user_db[aUser.userName] = aUser;
 
 
-    session = aUser;
-    // var session = null;
+    // session = aUser;
+    var session = null;
 
     document.getElementById("userName_display").innerHTML = "Please login";
 
@@ -467,6 +481,9 @@
     var down_key = 'ArrowDown';
     var left_key = 'ArrowLeft';
     var right_key = 'ArrowRight';
+    var pill_5Color = "purple";
+    var pill_15Color = "red";
+    var pill_25Color = "blue";
     var pill_number ; // return a number between 50-90
     var time_seconds = 60;
     var monster_number; // return a number between 1-3

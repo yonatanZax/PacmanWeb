@@ -16,8 +16,6 @@ var NONE        = 4,
     DOWN        = 1,
     RIGHT       = 11,
     WAITING     = 5,
-    PAUSE       = 6,
-    PLAYING     = 7,
     COUNTDOWN   = 8,
     EATEN_PAUSE = 9,
     DYING       = 10;
@@ -28,17 +26,55 @@ var  heightStep,
 var pacmanDirection = 'right',
     gameTime;
 
+var STATE,
+    RUNNING = 1,
+    PAUSE = 2,
+    intervalsArr = [];
+
+async function pause(){
+    STATE = PAUSE;
+    gameTime = time_elapsed;
+    clearIntervalsArr();
+}
+
+function  play() {
+    STATE = RUNNING;
+    start_time = new Date();
+    clearInterval(interval);
+    interval = window.setInterval(UpdatePosition, 250);
+    intervalsArr.push(interval);
+}
+
+function ShowAlert(text){
+    pause();
+    bootbox.alert({
+        message: text,
+        size: 'small',
+        className: 'default',
+        callback : play
+    });
+
+}
+
 function getTick(){
     return tick;
 }
 
-function Start() {
+async function clearIntervalsArr(){
+    intervalsArr.forEach(function(element){
+        window.clearInterval(element);
+    });
+    intervalsArr = [];
+}
+
+async function Start() {
     score = 0;
     tick = 0;
     // generateRandomStart();
     pac_color = "yellow";
     // var food_remain = pill_number;
     lives = 3;
+    STATE = RUNNING;
     start_time = new Date();
     // Assign PACMAN location
     board = Board();
@@ -50,15 +86,22 @@ function Start() {
 
     keysDown = {};
     addEventListener("keydown", function (e) {
-        keysDown[e.key] = true;
+        if (e.key === 'p') {
+            if (STATE === RUNNING)
+                pause();
+            else
+                play();
+        }
+        else if(STATE === RUNNING)
+            keysDown[e.key] = true;
     }, false);
     addEventListener("keyup", function (e) {
         keysDown[e.key] = false;
     }, false);
-    if (interval !== null){
-        clearInterval(interval);
-    }
-    interval = setInterval(UpdatePosition, 250);
+
+    // interval = setInterval(UpdatePosition, 250);
+    await clearIntervalsArr();
+    play();
 }
 
 function setCharactersLocations(){
@@ -89,15 +132,12 @@ function GetKeyPressed() {
     if (keysDown[up_key]) {
         return 1;
     }
-    // if (keysDown['ArrowDown']) {
     if (keysDown[down_key]) {
         return 2;
     }
-    // if (keysDown['ArrowLeft']) {
     if (keysDown[left_key]) {
         return 3;
     }
-    // if (keysDown['ArrowRight']) {
     if (keysDown[right_key]) {
         return 4;
     }
@@ -110,9 +150,11 @@ function setHeightWidthStep(){
 
 function Draw() {
     context.clearRect(0, 0, canvas.width, canvas.height); //clean board
-    lblScore.value = score;
-    lblTime.value = time_elapsed;
-    lblLives.value = lives;
+
+    document.getElementById("lblScore").innerHTML = score;
+    document.getElementById("lblTime").innerHTML = time_elapsed;
+    document.getElementById("lblLives").innerHTML = lives;
+
     // change height ad width in case it was changed
     setHeightWidthStep();
 
@@ -201,24 +243,6 @@ function moveSpecialSnack(){
     var chosenMove = possibleMoves[index];
     specialSnack.setPosition(chosenMove);
 
-
-    // var bestMoves = new Array();
-    // var minDistance = 10000;
-    // var chosenMove ;
-    // for ( var j = 0; j < possibleMoves.length; j++){
-    //     if ( Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j) <= minDistance){
-    //         minDistance = Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j);
-    //     }
-    // }
-    // // take all the moves with minimum distance
-    // for ( var j = 0; j < possibleMoves.length; j++){
-    //     if ( Math.abs(possibleMoves[j].i - shape.i) + Math.abs(possibleMoves[j].j - shape.j) === minDistance){
-    //         bestMoves.push(possibleMoves[j]);
-    //     }
-    // }
-    // chosenMove = bestMoves[Math.floor(Math.random() * bestMoves.length)];
-    // specialSnack.setPosition(chosenMove);
-
 }
 
 
@@ -227,26 +251,26 @@ function UpdatePosition() {
 
     tick++;
 
-    var x = GetKeyPressed();
+    var pressedKey = GetKeyPressed();
     moveGhosts();
     if (specialSnack.isAlive()) {
         moveSpecialSnack();
     }
-    if (x === 1) {
+    if (pressedKey === 1) {
         if (shape.j > 0 && board.boardAt(shape.i, shape.j - 1) !== WALL) {
             oldPos = myClone(shape);
             shape.j--;
         }
         pacmanDirection = 'up';
     }
-    if (x === 2) {
+    if (pressedKey === 2) {
         if (shape.j < board.getBoard()[0].length && board.boardAt(shape.i, shape.j + 1) !== WALL) {
             oldPos = myClone(shape);
             shape.j++;
         }
         pacmanDirection = 'down';
     }
-    if (x === 3) {
+    if (pressedKey === 3) {
         if (shape.i > 0 && board.boardAt(shape.i - 1, shape.j) !== WALL) {
             oldPos = myClone(shape);
             shape.i--;
@@ -257,7 +281,7 @@ function UpdatePosition() {
         }
         pacmanDirection = 'left';
     }
-    if (x === 4) {
+    if (pressedKey === 4) {
         if (shape.i < board.getBoard().length - 1 && board.boardAt(shape.i + 1, shape.j) !== WALL) {
             oldPos = myClone(shape);
             shape.i++;
@@ -287,32 +311,28 @@ function UpdatePosition() {
     if(testGhostHit()){
         lives--;
         if (lives === 0){
-            ShowAlert("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD", Start);
-            // Start();
+            ShowAlert("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
+            Start();
         } else {
-            ShowAlert("I guess this is not the reality you win.", setCharactersLocations);
+            ShowAlert("I guess this is not the reality you win.");
             score -= 10;
-            // setCharactersLocations();
+            setCharactersLocations();
         }
     }
     if(isGameOver){
         // TODO set the game is done because all the pills have been eaten
-        ShowAlert("All Gems were consumed.", setCharactersLocations);
-        // setCharactersLocations();
+        ShowAlert("All Gems were consumed.");
+        setCharactersLocations();
     }
     if (time_elapsed < 0){
         // TODO - do something about end of time
-        ShowAlert("Time has run out.", Start);
-        // Start();
+        ShowAlert("Time has run out.");
+        Start();
     }
 
 }
 
-function ShowAlert(text, callback){
-    gameTime = time_elapsed;
-    window.alert(text, callback);
-    start_time = new Date();
-}
+
 
 
 
@@ -344,31 +364,3 @@ function myClone(src) {
     return Object.assign({}, src);
 }
 
-// var currentCallback;
-//
-// // override default browser alert
-// window.alert = function(msg, callback){
-//
-//     $('.message').text(msg);
-//     $('.customAlert').css('animation', 'fadeIn 0.3s linear');
-//     $('.customAlert').css('display', 'inline');
-//     setTimeout(function(){
-//         $('.customAlert').css('animation', 'none');
-//     }, 300);
-//     currentCallback = callback;
-// };
-//
-// $(function(){
-//
-//     // add listener for when our confirmation button is clicked
-//     $('.confirmButton').click(function(){
-//         $('.customAlert').css('animation', 'fadeOut 0.3s linear');
-//         setTimeout(function(){
-//             $('.customAlert').css('animation', 'none');
-//             $('.customAlert').css('display', 'none');
-//         }, 300);
-//         currentCallback();
-//     });
-//
-//     $('.customAlert').css('animation', 'fadeOut 0.3s linear');
-// });
