@@ -79,7 +79,7 @@
 
 <!--/****   Welcome - login and registration    ****/-->
 
-<div id="welcome" class="visible frame" >
+<div id="welcome" class="visible" >
 
 
     <img src="images/Marvel-Pacman-logo-bw.png" class="center" height="280" width="340">
@@ -388,6 +388,8 @@
             <br>
             <br>
             <br>
+            <br>
+            <br>
 
         </div>
 
@@ -419,14 +421,14 @@
             <div class="modal-popup-header">
                                         <span onclick="document.getElementById('myModal').style.display='none'; play();" class="close"
                                               title="Close Modal">X</span>
-                <h5>Hello:)</h5>
+                <h5>Message</h5>
             </div>
             <div class="modal-popup-body">
-                <p id="popup-text">Body text</p>
+                <pre id="popup-text">Body text</pre>
             </div>
-            <div class="modal-popup-footer">
-                <h5>                <span class="center" onclick="document.getElementById('myModal').style.display='none'; play();"
-                                          title="Close Modal" style="color: black">OK</span></h5>
+            <div class="modal-popup-footer" onclick="document.getElementById('myModal').style.display='none'; play();">
+                <h5 align="center">                <span
+                                          title="Close Modal" style="color: black; alignment: center; align-content: center;">OK</span></h5>
 
             </div>
         </div>
@@ -457,7 +459,7 @@
 <!--    <img src="images/thanos_glove.png" height="70" width="100">-->
 
 
-    <canvas id="canvas" class="center" height="800px" width="800px"></canvas>
+    <canvas id="canvas" class="center" height="700px" width="700px"></canvas>
     <br>
 
 
@@ -473,18 +475,19 @@
 
     <br>
     <h1 class="center"> Game Over </h1>
-    <h3 id="gameOver_reason" class="center"> Game Over </h3>
+    <pre id="gameOver_reason" class="center"> Game Over </pre>
 
 
     <div align="center">
         <button class="animation_btn" onclick="showWelcome()" style="width:auto; border-color: black; border-style: solid"><span>Return</span></button>
+        <button class="animation_btn" onclick="switchContent('game'); Start();" style="width:auto; border-color: black; border-style: solid"><span>New Game</span></button>
     </div>
 
 </div>
 
 
 <footer class="myfooter">
-    <h3 id="footer" class="center" style="color: white">&copy 2019 Created by Roy Dor and Yonatan Zax | Have fun:)</h3>
+    <h3 id="footer" align="center" style="color: white; alignment:center;">&copy 2019 Created by Roy Dor and Yonatan Zax | Have fun:)</h3>
 </footer>
 
 
@@ -534,7 +537,7 @@
 
 
     function royLogin(){
-        document.getElementById('loginDiv').style.display='block' ;
+        document.getElementById('loginDiv').style.display='block';
         document.getElementById('userName_login').focus();
     }
 
@@ -606,11 +609,16 @@
 
     var pacImgName = "thanos";
 
+
+    var ghostImag = new Image();
+    ghostImag.src = 'images/groot_ghost.png';
+
+
     var ghosts = [];
     var specialSnack;
     var tick;
     var lives;
-    var myAudio;
+    var myAudio = document.getElementById("myAudio");;
     var moveToGame = false;
 
 

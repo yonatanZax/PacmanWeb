@@ -122,6 +122,8 @@ function saveSettings() {
     pill_25Color = $("#settings_25Points").val();
 
 
+
+
     if(moveToGame) {
         switchContent('game');
         Start();
@@ -163,84 +165,3 @@ function settings_changePac(pac) {
 
 
 
-
-
-
-//TODO - CHECK BUTTONS FOR DOUBLE MEANING
-function specialValue(keycode, event) {
-
-    var keyValue = -1;
-    switch (keycode) {
-        case 8:
-            keyValue = "BACKSPACE";
-            break;
-        case 9:
-            keyValue = "TAB";
-            break;
-        // case 13:
-        //     keyValue = "ENTER";
-        //     break;
-        case 16:
-            if (event.location === KeyboardEvent.DOM_KEY_LOCATION_LEFT) {
-                keyValue = "L-SHIFT";
-            } else if (event.location === KeyboardEvent.DOM_KEY_LOCATION_RIGHT) {
-                keyValue = "R-SHIFT";
-            }
-            break;
-        case 17:
-            if (event.location === KeyboardEvent.DOM_KEY_LOCATION_LEFT) {
-                keyValue = "L-CTRL";
-            } else if (event.location === KeyboardEvent.DOM_KEY_LOCATION_RIGHT) {
-                keyValue = "R-CTRL";
-            }
-            break;
-        case 18:
-            if (event.location === KeyboardEvent.DOM_KEY_LOCATION_LEFT) {
-                keyValue = "L-ALT";
-            } else if (event.location === KeyboardEvent.DOM_KEY_LOCATION_RIGHT) {
-                keyValue = "R-ALT";
-            }
-            break;
-        case 20:
-            keyValue = "CAPS LOCK";
-            break;
-        case 27:
-            keyValue = "ESCAPE";
-            break;
-        // case 32:
-        //     keyValue = "SPACE-BAR";
-        //     break;
-        case 33:
-            keyValue = "PAGE UP";
-            break;
-        case 34:
-            keyValue = "PAGE DOWN";
-            break;
-        case 35:
-            keyValue = "END";
-            break;
-        case 36:
-            keyValue = "HOME";
-            break;
-        case 37:
-            keyValue = '&larr;';
-            break;
-        case 38:
-            keyValue = '&uarr;';
-            break;
-        case 39:
-            keyValue = '&rarr;';
-            break;
-        case 40:
-            keyValue = '&darr;';
-            break;
-        case 45:
-            keyValue = "INSERT";
-            break;
-        case 46:
-            keyValue = "DELETE";
-            break;
-    }
-
-    return keyValue;
-}
