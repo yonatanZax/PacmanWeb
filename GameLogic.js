@@ -354,7 +354,7 @@ function UpdatePosition() {
         if (lives === 0){
             var msg = "Oh Snap.. You couldn't stop the Snap\n Half of the population has DISAPPEARED\n" +
                 "Your score is: " + score +'\n' +
-                'We have a winner!!';
+                'You Lost!' ;
             gameFinished(msg);
         } else {
             ShowAlert("I guess this is not the reality you win.\nLets try a different one");
@@ -365,7 +365,7 @@ function UpdatePosition() {
     if(isGameOver){
         // TODO set the game is done because all the pills have been eaten
         var msg = "You have collected all the stones!\n" +
-            "Your score is: " + score +'\n' +
+            "Your score is: " + score + '\n' +
             'We have a winner!!';
         gameFinished(msg);
 
