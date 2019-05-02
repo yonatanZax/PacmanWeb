@@ -359,6 +359,7 @@ function UpdatePosition() {
                 "Your score is: " + score +'\n' +
                 'You Lost!' ;
             gameFinished(msg, false);
+
         } else {
             ShowAlert("I guess this is not the reality you win.\nLets try a different one");
             score -= 10;
@@ -370,6 +371,7 @@ function UpdatePosition() {
         var msg = "You have collected all the stones!\n" +
             "Your score is: " + score + '\n' +
             'We have a winner!!';
+
         gameFinished(msg, true);
 
     }
@@ -380,13 +382,17 @@ function UpdatePosition() {
             msg = "Time has run out.\n" +
                 "Your score is: " + score +'\n' +
                 'You can do better!';
+
             gameFinished(msg, false);
+
         }else {
             msg = "Time has run out.\n" +
                 "Your score is: " + score +'\n' +
                 'We have a winner!!';
+
             gameFinished(msg, true);
         }
+
     }
 
 }
