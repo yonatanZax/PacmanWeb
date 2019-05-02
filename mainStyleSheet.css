@@ -30,13 +30,11 @@ input:invalid {
     background-color:black;
     padding: 1px;
     margin-top: 10px;
-    /*padding-right: 1px;*/
-    /*margin-right: 1px;*/
+
 
 
     position: relative;
     bottom: 1%;
-    /*width: 96%;*/
     height: 6%;
 
 }
@@ -82,7 +80,6 @@ td{
     width: 50%;
     padding: 0.5%;
     margin: 5px 10px 10px 20px;
-    /*display: inline-block;*/
     font-weight: bold;
     text-align: center;
 }
@@ -168,12 +165,6 @@ pre{
 
 }
 
-
-/*.gameDigital{*/
-/*    width: 10%;*/
-/*    padding: 0.5%;*/
-/*    margin: 5px 10px 10px 20px;*/
-/*}*/
 
 
 #game{

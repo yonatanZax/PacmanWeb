@@ -44,13 +44,7 @@ function settings_randomValues() {
     $("#settings_15Points").val(rand["pill_15Points"]);
     $("#settings_25Points").val(rand["pill_25Points"]);
 
-
-
 }
-
-
-
-
 
 
 
@@ -62,7 +56,6 @@ document.addEventListener('keydown', function(event){
     if ( currentDirection != null){
         var keyValue = event.key;
         if(keyValue !== 'p' && keyValue !== ' ' && keyValue !== 'Enter'){
-
             document.getElementById("settings_" + currentDirection + "Key").innerHTML = keyValue;
             document.getElementById("settings_" + currentDirection + "Key").style.background='#ffff00';
         }
@@ -75,9 +68,6 @@ document.addEventListener('keydown', function(event){
 
 
 
-
-
-
 function setCurDirection( direction){
     document.getElementById("settings_rightKey").style.background='yellow';
     document.getElementById("settings_leftKey").style.background='yellow';
@@ -86,9 +76,6 @@ function setCurDirection( direction){
     document.getElementById("settings_" + direction + "Key").style.background='#00cc00';
     currentDirection = direction;
 }
-
-
-
 
 
 
@@ -135,9 +122,6 @@ function saveSettings() {
 
 
 }
-
-
-
 
 
 

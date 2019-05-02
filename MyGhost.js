@@ -1,3 +1,5 @@
+
+
 MyGhost = function (game, map, colour, pId) {
 
     var position  = null,
@@ -58,75 +60,12 @@ MyGhost = function (game, map, colour, pId) {
         var imgHeight = heightStep;
         cxt.drawImage(ghostImag, xPos, yPos, imgWidth - 10, imgHeight);
 
-        // cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
-        // cxt.fillStyle = "black"; //color
+
         cxt.fill();
 
     }
 
-    // function draw(cxt){
-    //     var center = {};
-    //     context.clearRect(x - widthStep/2 - 2, y - heightStep/2 - 2, widthStep + 2, heightStep + 2);
-    //
-    //     center.x = position.i * widthStep + widthStep / 2;
-    //     center.y = position.j * heightStep + heightStep / 2;
-    //     x = center.x;
-    //     y = center.y;
-    //     if (direction !== null){
-    //         if (direction === 'left'){
-    //             speedX = - widthStep / 50;
-    //             speedY = 0;
-    //         }
-    //         else if(direction === 'right'){
-    //             speedX = widthStep / 50;
-    //             speedY = 0;
-    //         }
-    //         else if(direction === 'up'){
-    //             speedY = - heightStep/50;
-    //             speedX = 0;
-    //         }
-    //         else if(direction === 'down'){
-    //             speedY = heightStep/50;
-    //             speedX = 0;
-    //         }
-    //     }
-    //     // speedX = widthStep / 50;
-    //     // speedY = heightStep/50;
-    //     animationIntervalTime = 5;
-    //     if (interval !== null){
-    //         clearInterval(animationInterval);
-    //     }
-    //     animationInterval = setInterval(updateCharacter, animationIntervalTime)
-    // }
-    // var x = 0,
-    //     y = 0,
-    //     speedX = 0,
-    //     speedY = 0,
-    //     animationInterval = null,
-    //     animationIntervalTime;
-    //
-    //
-    // function clear(){
-    //     context.clearRect(x - widthStep/2 - 2, y - heightStep/2 - 2, widthStep + 2, heightStep + 2);
-    // }
-    //
-    // function newPos() {
-    //     x += speedX;
-    //     y += speedY;
-    // }
-    //
-    // function update(){
-    //     context.beginPath();
-    //     context.rect(x - widthStep/2, y - heightStep/2, widthStep, heightStep);
-    //     context.fillStyle = "black"; //color
-    //     context.fill();
-    // }
-    //
-    // function updateCharacter() {
-    //     clear();
-    //     newPos();
-    //     update();
-    // }
+
 
     function isVulnerable() {
         return eatable !== null;
@@ -179,10 +118,9 @@ MyGhost = function (game, map, colour, pId) {
                 position.j = map.getBoard()[0].length - 2;
                 break;
         }
-        // position.i = 9;
-        // position.j = 10;
+
         direction = getRandomDirection();
-        // due = getRandomDirection();
+
     }
 
     function secondsAgo(tick) {

@@ -66,8 +66,6 @@ async function ShowAlert(text){
     await pause();
     STATE = WAITING;
     showPopup(text);
-    // window.alert(text);
-    // play();
 
 }
 
@@ -193,60 +191,6 @@ function drawPacMan(context){
     context.fill();
 
 
-
-
-    // if (pacmanDirection === 'up') {
-    //
-    //     /*    Draw as Image    */
-    //     const ghostImag = new Image();
-    //     ghostImag.src = 'images/thanos_pacman.png';
-    //
-    //     context.beginPath();
-    //
-    //     var xPos = center.x - widthStep / 2;
-    //     var yPos = center.y - heightStep / 2;
-    //     var imgWidth = widthStep;
-    //     var imgHeight = heightStep;
-    //     context.drawImage(ghostImag, xPos, yPos, imgWidth  , imgHeight + 10);
-    //     context.fill();
-
-
-        // context.arc(center.x, center.y, widthStep / 2, (1.50 + .15) % 2 * Math.PI, (1.50 + 1.85) % 2 * Math.PI); // half circle
-        // context.lineTo(center.x, center.y);
-        // context.fillStyle = pac_color; //color
-        // context.fill();
-        // context.beginPath();
-        // context.arc(center.x -12, center.y -3, 4, 0, 2 * Math.PI); // circle
-
-
-
-    // } else if (pacmanDirection === 'down') {
-    //     context.arc(center.x, center.y, widthStep / 2, (0.5 + 0.15) % 2 * Math.PI, (0.5 + 1.85) % 2 * Math.PI); // half circle
-    //     context.lineTo(center.x, center.y);
-    //     context.fillStyle = pac_color; //color
-    //     context.fill();
-    //     context.beginPath();
-    //     context.arc(center.x + 12, center.y +3, 4, 0, 2 * Math.PI); // circle
-    // } else if (pacmanDirection === 'right') {
-    //     context.arc(center.x, center.y, widthStep / 2, (0 + 0.15) % 2 * Math.PI, (0 + 1.85) % 2 * Math.PI); // half circle
-    //     context.lineTo(center.x, center.y);
-    //     context.fillStyle = pac_color; //color
-    //     context.fill();
-    //     context.beginPath();
-    //     context.arc(center.x + 3, center.y - 12, 4, 0, 2 * Math.PI); // circle
-    // } else if (pacmanDirection === 'left') {
-    //     context.arc(center.x, center.y, widthStep / 2, (1 + 0.15) % 2 * Math.PI, (1 + 1.85) % 2 * Math.PI); // half circle
-    //     context.lineTo(center.x, center.y);
-    //     context.fillStyle = pac_color; //color
-    //     context.fill();
-    //     context.beginPath();
-    //     context.arc(center.x + 3, center.y - 12, 4, 0, 2 * Math.PI); // circle
-    // }
-    // context.fillStyle = "black"; //color
-    // context.scale.x = -1;
-    // // rotatePacman(context);
-    // context.fill();
-    // context.setTransform(1, 0, 0, 1, 0, 0);
 }
 
 function moveGhosts(){
@@ -280,12 +224,6 @@ function moveSpecialSnack(){
     specialSnack.setPosition(chosenMove);
 
 }
-
-
-
-
-// window.onload = function (event) {
-
 
 
 
@@ -339,12 +277,10 @@ function UpdatePosition() {
     if (board.boardAt(shape.i, shape.j) > 100) {
         score += - 100 + board.boardAt(shape.i, shape.j);
     }
-    // board.getBoard()[shape.i][shape.j] = 2;
+
     var currentTime = new Date();
     time_elapsed = Math.round(gameTime - ((currentTime - start_time) / 1000)) + 1;
-    // if (score >= 20 && time_elapsed <= 10) {
-    //     pac_color = "green";
-    // }
+
     Draw();
 
     if (specialSnack.isAlive() && testSpecialSnackHit()){

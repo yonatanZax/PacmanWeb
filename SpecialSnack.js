@@ -1,10 +1,12 @@
+
+
+
 SpecialSnack = function (game, map, colour, id) {
 
     var position  = null,
         oldPos    = null,
         id        = id,
         alive     = true;
-
 
     function getPossibleMoves(){
         var possibleMoves = map.getPossibleMoves(position.i, position.j);
@@ -44,8 +46,6 @@ SpecialSnack = function (game, map, colour, id) {
 
 
         cxt.drawImage(snackImg, xPos, yPos, imgWidth, imgHeight);
-        // cxt.rect(center.x - widthStep/2, center.y - heightStep/2, widthStep, heightStep);
-        // cxt.fillStyle = "gold"; //color
         cxt.fill();
     }
 
@@ -87,10 +87,7 @@ SpecialSnack = function (game, map, colour, id) {
                 position.j = map.getBoard()[0].length - 2;
                 break;
         }
-        // position.i = 9;
-        // position.j = 10;
-        // direction = getRandomDirection();
-        // due = getRandomDirection();
+
     }
 
     function secondsAgo(tick) {

@@ -122,10 +122,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
 
-/* Full-width input fields */
-
-
-
 /* Add a background color when the inputs get focus */
 input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
