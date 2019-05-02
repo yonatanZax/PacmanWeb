@@ -23,6 +23,21 @@ var NONE        = 4,
 var  heightStep,
     widthStep  ;
 
+keysDown = {};
+addEventListener("keydown", function (e) {
+    if (e.code === 'KeyP') {
+        if (STATE === RUNNING)
+            pause();
+        else if(STATE === PAUSE)
+            play();
+    }
+    else if(STATE === RUNNING)
+        keysDown[e.key] = true;
+}, false);
+addEventListener("keyup", function (e) {
+    keysDown[e.key] = false;
+}, false);
+
 var pacmanDirection = 'right',
     gameTime;
 
@@ -49,6 +64,7 @@ function  play() {
 
 async function ShowAlert(text){
     await pause();
+    STATE = WAITING;
     showPopup(text);
     // window.alert(text);
     // play();
@@ -84,20 +100,7 @@ async function Start() {
     specialSnack = SpecialSnack({"getTick":getTick}, board,'black', 3);
     setCharactersLocations();
 
-    keysDown = {};
-    addEventListener("keydown", function (e) {
-        if (e.code === 'KeyP') {
-            if (STATE === RUNNING)
-                pause();
-            else
-                play();
-        }
-        else if(STATE === RUNNING)
-            keysDown[e.key] = true;
-    }, false);
-    addEventListener("keyup", function (e) {
-        keysDown[e.key] = false;
-    }, false);
+
 
     // interval = setInterval(UpdatePosition, 250);
     await clearIntervalsArr();
@@ -395,7 +398,7 @@ function showPopup(text) {
 
     modal.style.display = "block";
 
-    pause();
+    // pause();
 
 
 }
