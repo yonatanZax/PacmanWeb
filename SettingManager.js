@@ -10,7 +10,7 @@ function generateRandomStart() {
         left_key : 'ArrowLeft',
         right_key : 'ArrowRight',
 
-        pill_5Points:  '#8000ff', // purple
+        pill_5Points:  '#00cc00', // green
         pill_15Points: '#ff3300', // red
         pill_25Points: '#0000ff', // blue
 
@@ -51,14 +51,6 @@ function settings_randomValues() {
 
 
 
-function getKey(event, direction) {
-
-    var code = event.keyCode;         // Get the Unicode value
-    var keyValue = String.fromCharCode(code);    // Convert the value into a character
-
-    document.getElementById(direction+"KeyLabel").innerHTML = keyValue;
-}
-
 
 
 
@@ -69,13 +61,13 @@ document.addEventListener('keydown', function(event){
 
     if ( currentDirection != null){
         var keyValue = event.key;
+        if(keyValue !== 'p' && keyValue !== ' ' && keyValue !== 'Enter'){
+
+            document.getElementById("settings_" + currentDirection + "Key").innerHTML = keyValue;
+            document.getElementById("settings_" + currentDirection + "Key").style.background='#ffff00';
+        }
 
 
-        // var elmBtn = document.getElementById("settings_" + currentDirection + "Key");
-        // elmBtn.innerHTML = keyValue;
-        // elmBtn.style.background='#00cc00';
-        document.getElementById("settings_" + currentDirection + "Key").innerHTML = keyValue;
-        document.getElementById("settings_" + currentDirection + "Key").style.background='#ffff00';
     }
 
     currentDirection = null;
@@ -110,15 +102,13 @@ function saveSettings() {
     }
 
     up_key = $("#settings_upKey").html();
-    if (up_key === 'UP')
-        up_key = '&uarr';
     down_key = $("#settings_downKey").html();
     left_key = $("#settings_leftKey").html();
     right_key = $("#settings_rightKey").html();
 
 
     if ($("#settings_numOfBalls").val() === '' || $("#settings_timeToPlay").val() === '' || $("#settings_numOfMonsters").val() === ''){
-        alert("Please fill all the fields");
+        showPopup("Please fill all the fields");
         return;
     }
 
@@ -132,13 +122,40 @@ function saveSettings() {
     pill_25Color = $("#settings_25Points").val();
 
 
-    switchContent('welcome');
+    if(moveToGame) {
+        switchContent('game');
+        Start();
+
+    }else {
+        switchContent('welcome');
+    }
 
 
 
 }
 
 
+
+
+
+
+function settings_changePac(pac) {
+    var pacList = ["thanos", "spiderman", "ironman", "halk"];
+
+    var unSelect = pacList.filter(function (value) {
+        return value!=pac;
+    });
+
+    for (var i = 0; i < unSelect.length ; i++){
+        var pacOut = document.getElementById(unSelect[i] + "_pacman_right");
+        pacOut.style.borderStyle = "none";
+    }
+
+    var pacIn = document.getElementById(pac + "_pacman_right");
+    pacIn.style.borderStyle = "solid";
+
+    pacImgName = pac;
+}
 
 
 

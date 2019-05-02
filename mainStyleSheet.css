@@ -34,6 +34,10 @@ input:invalid {
     padding-right: 1px;
     margin-right: 1px;
 
+    position: fixed;
+    bottom: 0;
+    width: 96%;
+
 }
 
 

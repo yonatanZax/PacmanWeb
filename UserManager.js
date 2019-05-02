@@ -22,7 +22,6 @@ class User {
 
 function manageLogin() {
 
-    var footer = document.getElementById("footer");
     var user_display = document.getElementById("userName_display");
 
 
@@ -36,7 +35,6 @@ function manageLogin() {
     if (check) {
         session = user_db[uName];
         user_display.innerHTML = session.fName + " " + session.lName + " is logged";
-        footer.innerHTML = "User logged in successfully";
         document.getElementById('loginDiv').style.display = 'none';
 
     } else {
@@ -45,31 +43,34 @@ function manageLogin() {
 
 }
 
-function manageRegister() {
-
-    var uName = $('#userName_register').val();
-    var pass = $('#password_register').val();
-    var fName = $('#fName_register').val();
-    var lName = $('#lName_register').val();
-    var email = $('#email_register').val();
-
-
-    var birthbay = $('#birthday_register').val();
-
-    var newUserRegistration = new User({
-        userName: uName, password: pass,
-        fName: fName, lName: lName,
-        email: email, birthday: birthbay
-    });
-    if (addUserToList(newUserRegistration)) {
-        footer.innerHTML = "New user was created successfully";
-        document.getElementById('registerDiv').style.display = 'none'
-    } else {
-        alert("Incorrect values - registration");
-    }
-
-
-}
+// function manageRegister() {
+//
+//     var user_display = document.getElementById("userName_display");
+//
+//
+//     var uName = $('#userName_register').val();
+//     var pass = $('#password_register').val();
+//     var fName = $('#fName_register').val();
+//     var lName = $('#lName_register').val();
+//     var email = $('#email_register').val();
+//
+//
+//     var birthbay = $('#birthday_register').val();
+//
+//     var newUserRegistration = new User({
+//         userName: uName, password: pass,
+//         fName: fName, lName: lName,
+//         email: email, birthday: birthbay
+//     });
+//     if (addUserToList(newUserRegistration)) {
+//         user_display.innerHTML = "New user was created successfully";
+//         document.getElementById('registerDiv').style.display = 'none'
+//     } else {
+//         alert("Incorrect values - registration");
+//     }
+//
+//
+// }
 
 function checkUser(userTocheck) {
 
@@ -94,7 +95,9 @@ $(document).ready(function (event) {
     $("#registerBtn").click(
 
         function () {
-//         var userNameValidation = $("#userName_register")[0].checkValidity();
+
+            var user_display = document.getElementById("userName_display");
+
             var fNameValidation = $("#fName_register")[0].checkValidity();
             var lNameValidation = $("#lName_register")[0].checkValidity();
 
@@ -103,7 +106,6 @@ $(document).ready(function (event) {
 
             //validate if the pattern match
             if (passwordValidation && fNameValidation && lNameValidation) {
-//         if (userNameValidation && passwordValidation && emailValidation) {
 
                 var uName = $('#userName_register').val();
                 var pass = $('#password_register').val();
@@ -119,8 +121,8 @@ $(document).ready(function (event) {
                     email:email, birthday:birthbay
                 });
                 if(addUserToList(newUserRegistration)){
-                    footer.innerHTML = "New user was created successfully";
-                    document.getElementById('registerDiv').style.display='none'
+                    user_display.innerHTML = "New user was created successfully";
+                    document.getElementById('registerDiv').style.display='none';
                     session = null;
                 }else{
                     alert("Incorrect values - registration");
@@ -148,11 +150,6 @@ $(document).ready(function (event) {
                     $('#lName_register')[0].reportValidity();
 
                 }
-
-
-
-
-
 
 
                 event.preventDefault();
