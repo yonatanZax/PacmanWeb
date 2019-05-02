@@ -180,8 +180,9 @@ function drawPacMan(context){
     context.beginPath();
 
     /*    Draw as Image    */
-    const pacImag = new Image();
+    var pacImag = new Image();
     pacImag.src = 'images/' + pacImgName + '_pacman_' + pacmanDirection + '.png';
+
     var xPos = center.x - widthStep / 2;
     var yPos = center.y - heightStep / 2;
     var imgWidth = widthStep;
@@ -363,7 +364,7 @@ function UpdatePosition() {
     if(testGhostHit()){
         lives--;
         if (lives === 0){
-            ShowAlert("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
+            // ShowAlert("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
             gameFinished("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
             // Start();
         } else {
@@ -374,14 +375,12 @@ function UpdatePosition() {
     }
     if(isGameOver){
         // TODO set the game is done because all the pills have been eaten
-        ShowAlert("All Gems were consumed.");
-        setCharactersLocations();
+        gameFinished("All Gems were consumed.");
+
     }
     if (time_elapsed < 0){
         // TODO - do something about end of time
-        ShowAlert("Time has run out.");
         gameFinished("Time has run out.");
-        // Start();
     }
 
 }
