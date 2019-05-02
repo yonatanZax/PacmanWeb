@@ -358,7 +358,8 @@ function UpdatePosition() {
             var msg = "Oh Snap.. You couldn't stop the Snap\n Half of the population has DISAPPEARED\n" +
                 "Your score is: " + score +'\n' +
                 'You Lost!' ;
-            gameFinished(msg);
+            gameFinished(msg, false);
+
         } else {
             ShowAlert("I guess this is not the reality you win.\nLets try a different one");
             score -= 10;
@@ -370,7 +371,8 @@ function UpdatePosition() {
         var msg = "You have collected all the stones!\n" +
             "Your score is: " + score + '\n' +
             'We have a winner!!';
-        gameFinished(msg);
+
+        gameFinished(msg, true);
 
     }
     if (time_elapsed < 0){
@@ -380,12 +382,17 @@ function UpdatePosition() {
             msg = "Time has run out.\n" +
                 "Your score is: " + score +'\n' +
                 'You can do better!';
+
+            gameFinished(msg, false);
+
         }else {
             msg = "Time has run out.\n" +
                 "Your score is: " + score +'\n' +
                 'We have a winner!!';
+
+            gameFinished(msg, true);
         }
-        gameFinished(msg);
+
     }
 
 }
@@ -403,9 +410,20 @@ function showPopup(text) {
 
 }
 
-async function gameFinished(reason){
+async function gameFinished(reason, win_lost){
     // TODO - do what it say it suppose to do
     await pause();
+    if(win_lost === true){
+        var winGif = document.getElementById("thanos_win");
+        winGif.className = 'visible';
+        var lostGif = document.getElementById("thanos_lost");
+        lostGif.className = 'hidden';
+    }else{
+        var winGif = document.getElementById("thanos_win");
+        winGif.className = 'hidden';
+        var lostGif = document.getElementById("thanos_lost");
+        lostGif.className = 'visible';
+    }
     showGameOver(reason);
 
 }

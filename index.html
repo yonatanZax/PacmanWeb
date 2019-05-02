@@ -35,9 +35,9 @@
 
 <header>
 
-<!--    <div class="toolbar" style="background-color: black">-->
-<!--        <img src="images/Marvel-Pacman%20header.png" height="60">-->
-<!--    </div>-->
+    <!--    <div class="toolbar" style="background-color: black">-->
+    <!--        <img src="images/Marvel-Pacman%20header.png" height="60">-->
+    <!--    </div>-->
 
 
 
@@ -95,60 +95,60 @@
 
 
     <div id="loginDiv" class="modal" style="background-color: white">
-         <span onclick="document.getElementById('loginDiv').style.display='none',   document.getElementById('userName_login').focus();" class="close"></span>
+        <span onclick="document.getElementById('loginDiv').style.display='none',   document.getElementById('userName_login').focus();" class="close"></span>
 
 
-            <div class="container">
+        <div class="container">
 
-                <div class="center">
-                    <table>
-                        <tr>
-                            <td>
-                                <label for="userName_login"><b>Username</b></label>
+            <div class="center">
+                <table>
+                    <tr>
+                        <td>
+                            <label for="userName_login"><b>Username</b></label>
 
-                            </td>
-                            <td>
-                                <input id="userName_login" class="loginInput" type="text" placeholder="Enter Username" name="userName" required>
-                            </td>
-                        </tr>
+                        </td>
+                        <td>
+                            <input id="userName_login" class="loginInput" type="text" placeholder="Enter Username" name="userName" required>
+                        </td>
+                    </tr>
 
 
-                        <tr>
-                            <td>
-                                <label for="password_login"><b>Password</b></label>
+                    <tr>
+                        <td>
+                            <label for="password_login"><b>Password</b></label>
 
-                            </td>
-                            <td>
-                                <input id="password_login" class="loginInput" type="password" placeholder="Enter Password"
-                                       name="password" required>
-                            </td>
-                        </tr>
+                        </td>
+                        <td>
+                            <input id="password_login" class="loginInput" type="password" placeholder="Enter Password"
+                                   name="password" required>
+                        </td>
+                    </tr>
 
-                    </table>
+                </table>
 
-                    <button type="button" onclick="document.getElementById('loginDiv').style.display='none'" class="cancelbtn">Cancel</button>
-<!--                    <button id="loginBtn" class="submitBtn">Login</button>-->
-                    <button id="loginBtn" class="submitBtn" onclick="manageLogin();">Login</button>
-
-                </div>
+                <button type="button" onclick="document.getElementById('loginDiv').style.display='none'" class="cancelbtn">Cancel</button>
+                <!--                    <button id="loginBtn" class="submitBtn">Login</button>-->
+                <button id="loginBtn" class="submitBtn" onclick="manageLogin();">Login</button>
 
             </div>
+
+        </div>
 
     </div>
 
 
     <div id="registerDiv" class="modal" style="background-color: white">
         <span onclick="document.getElementById('registerDiv').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <div class="container">
-                <h1>Sign Up</h1>
-                <p>Please fill in this form to create an account.</p>
-                <hr>
+        <div class="container">
+            <h1>Sign Up</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
 
-                <div class="center">
+            <div class="center">
                 <table>
                     <tr>
                         <td><label><b>User name</b></label></td>
-                <td><input id="userName_register" class="loginInput" type="text" placeholder="Enter username" name="userName" required></td>
+                        <td><input id="userName_register" class="loginInput" type="text" placeholder="Enter username" name="userName" required></td>
                     </tr>
 
                     <tr>
@@ -160,7 +160,7 @@
                     <tr>
                         <td><br><label><b>First name</b></label></td>
                         <td><input id="fName_register" class="loginInput" type="text" placeholder="Enter first name" name="fName" required
-                            pattern="^[^0-9]+$" title="Numbers are not allowed"></td>
+                                   pattern="^[^0-9]+$" title="Numbers are not allowed"></td>
                     </tr>
 
                     <tr>
@@ -173,7 +173,7 @@
                         <td><br><label><b>Email</b></label></td>
                         <td><input id="email_register" class="loginInput" type="email" placeholder="Enter Email" name="email" required
                                    title="Must be a valid email"></td>
-<!--                                    title="Must be a valid email"></td>-->
+                        <!--                                    title="Must be a valid email"></td>-->
 
                     </tr>
 
@@ -185,12 +185,12 @@
                 </table></div>
 
 
-                <div class="center">
-                    <button type="button" onclick="document.getElementById('registerDiv').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button id="registerBtn" class="submitBtn">Sign Up</button>
-<!--                    <button id="registerBtn" class="submitBtn" onclick="manageRegister()">Sign Up</button>-->
-                </div>
+            <div class="center">
+                <button type="button" onclick="document.getElementById('registerDiv').style.display='none'" class="cancelbtn">Cancel</button>
+                <button id="registerBtn" class="submitBtn">Sign Up</button>
+                <!--                    <button id="registerBtn" class="submitBtn" onclick="manageRegister()">Sign Up</button>-->
             </div>
+        </div>
 
     </div>
 
@@ -216,179 +216,179 @@
 
     </div>
 
-<!--    <form class="modal-content">-->
-<!--            <span onclick="document.getElementById('aboutModal').style.display='none'" class="close"-->
-<!--                  title="Close Modal">&times;</span>-->
-<!--        <div class="container">-->
-<!--            <h1>About</h1>-->
-<!--            <p>about about about...</p>-->
-<!--            <hr>-->
-<!--        </div>-->
-<!--    </form>-->
+    <!--    <form class="modal-content">-->
+    <!--            <span onclick="document.getElementById('aboutModal').style.display='none'" class="close"-->
+    <!--                  title="Close Modal">&times;</span>-->
+    <!--        <div class="container">-->
+    <!--            <h1>About</h1>-->
+    <!--            <p>about about about...</p>-->
+    <!--            <hr>-->
+    <!--        </div>-->
+    <!--    </form>-->
 </div>
 
 
 <!--/****   Settings    ****/-->
 <div id="settings" class="hidden">
+    <div class="center">
+        <h1>Settings</h1>
+        <hr>
+
+
+
+        <!--            Keyboard Settings               -->
+
+
+
+
         <div class="center">
-            <h1>Settings</h1>
-            <hr>
-
-
-
-            <!--            Keyboard Settings               -->
-
-
-
-
-            <div class="center">
-                <button onclick="settings_randomValues()" style="width: 100%">Set random values ???</button>
-                <br>
-
-            </div>
-
-<!--            <p id="testSettings"> Test</p>-->
-
-            <h3>Set game keyboard</h3>
-            <p>Keys: Space, Enter, P - are not allowed...</p>
+            <button onclick="settings_randomValues()" style="width: 100%">Set random values ???</button>
             <br>
-
-            <table>
-                <tr>
-                    <td></td>
-                    <td>
-                        <div class="center">
-                        <button id="settings_upKey" class="keyboardBtn" onclick="setCurDirection('up')">UP</button>
-                    </div>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="center">
-                            <button id="settings_leftKey" class="keyboardBtn" onclick="setCurDirection('left')">LEFT</button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="center">
-                            <button id="settings_downKey" class="keyboardBtn" onclick="setCurDirection('down')">DOWN</button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="center">
-                            <button id="settings_rightKey" class="keyboardBtn" onclick="setCurDirection('right')">RIGHT</button>
-                        </div>
-                    </td>
-                </tr>
-
-
-            </table>
-
-
-
-
-            <hr>
-
-            <h3>Select Pacman</h3>
-
-            <table>
-                <tr>
-                    <td><img id="thanos_pacman_right" src="images/thanos_pacman_right.png" onclick="settings_changePac('thanos')" class="center" height="80" width="80" style="border-color: black; border-style: solid"></td>
-                    <td ><img id="spiderman_pacman_right" src="images/spiderman_pacman_right.png" onclick="settings_changePac('spiderman')" class="center" height="80" width="80" style="border-color: black;"></td>
-                    <td><img id="ironman_pacman_right" src="images/ironman_pacman_right.png" onclick="settings_changePac('ironman')" class="center" height="80" width="80" style="border-color: black;"></td>
-                    <td><img id="halk_pacman_right" src="images/halk_pacman_right.png" onclick="settings_changePac('halk')" class="center" height="80" width="80" style="border-color: black;"></td>
-
-                </tr>
-
-            </table>
-
-
-
-
-
-
-            <hr>
-
-
-
-
-
-
-
-
-
-            <!--            Settings table               -->
-
-            <table>
-
-                <tr>
-                    <td>
-                        <label><b>Number of balls</b></label>
-                    </td>
-
-                    <td>
-                        <input id="settings_numOfBalls" class="inputField" type="number" min="50" max="90" name="settings_numOfBalls">
-                    </td>
-                </tr>
-
-                <!--                new row          -->
-
-                <tr>
-                    <td>
-                        <label><b>Time to play (in sec)</b></label>
-                    </td>
-
-                    <td>
-                        <input id="settings_timeToPlay" class="inputField" type="number" min="60" name="settings_timeToPlay">
-                    </td>
-                </tr>
-
-
-                <!--                new row          -->
-
-                <tr>
-                    <td>
-                        <label><b>Monsters</b></label>
-                    </td>
-
-                    <td>
-                        <input id="settings_numOfMonsters" class="inputField" type="number" min="1" max="3" name="settings_numOfMonsters">
-                    </td>
-                </tr>
-
-
-
-            </table>
-
-            <table>
-                <tr>
-                    <td><label><b>5 Points</b></label></td>
-                    <td><input id="settings_5Points" class="inputField" type="color" value="#ff0000"></td>
-                </tr>
-
-                <tr>
-                    <td><label><b>15 Points</b></label></td>
-                    <td><input id="settings_15Points" class="inputField"  type="color" value="#ff0000"></td>
-                </tr>
-
-                <tr>
-                    <td><label><b>25 Points</b></label></td>
-                    <td><input id="settings_25Points" class="inputField" type="color" value="#ff0000"></td>
-                </tr>
-
-            </table>
-
-
-
-            <br>
-            <div class="center">
-                <button onclick="saveSettings()" style="width: 100%">Save changes</button>
-            </div>
-
-            <br>
-
 
         </div>
+
+        <!--            <p id="testSettings"> Test</p>-->
+
+        <h3>Set game keyboard</h3>
+        <p>Keys: Space, Enter, P - are not allowed...</p>
+        <br>
+
+        <table>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="center">
+                        <button id="settings_upKey" class="keyboardBtn" onclick="setCurDirection('up')">UP</button>
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="center">
+                        <button id="settings_leftKey" class="keyboardBtn" onclick="setCurDirection('left')">LEFT</button>
+                    </div>
+                </td>
+                <td>
+                    <div class="center">
+                        <button id="settings_downKey" class="keyboardBtn" onclick="setCurDirection('down')">DOWN</button>
+                    </div>
+                </td>
+                <td>
+                    <div class="center">
+                        <button id="settings_rightKey" class="keyboardBtn" onclick="setCurDirection('right')">RIGHT</button>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table>
+
+
+
+
+        <hr>
+
+        <h3>Select Pacman</h3>
+
+        <table>
+            <tr>
+                <td><img id="thanos_pacman_right" src="images/thanos_pacman_right.png" onclick="settings_changePac('thanos')" class="center" height="80" width="80" style="border-color: black; border-style: solid"></td>
+                <td ><img id="spiderman_pacman_right" src="images/spiderman_pacman_right.png" onclick="settings_changePac('spiderman')" class="center" height="80" width="80" style="border-color: black;"></td>
+                <td><img id="ironman_pacman_right" src="images/ironman_pacman_right.png" onclick="settings_changePac('ironman')" class="center" height="80" width="80" style="border-color: black;"></td>
+                <td><img id="halk_pacman_right" src="images/halk_pacman_right.png" onclick="settings_changePac('halk')" class="center" height="80" width="80" style="border-color: black;"></td>
+
+            </tr>
+
+        </table>
+
+
+
+
+
+
+        <hr>
+
+
+
+
+
+
+
+
+
+        <!--            Settings table               -->
+
+        <table>
+
+            <tr>
+                <td>
+                    <label><b>Number of balls</b></label>
+                </td>
+
+                <td>
+                    <input id="settings_numOfBalls" class="inputField" type="number" min="50" max="90" name="settings_numOfBalls">
+                </td>
+            </tr>
+
+            <!--                new row          -->
+
+            <tr>
+                <td>
+                    <label><b>Time to play (in sec)</b></label>
+                </td>
+
+                <td>
+                    <input id="settings_timeToPlay" class="inputField" type="number" min="60" name="settings_timeToPlay">
+                </td>
+            </tr>
+
+
+            <!--                new row          -->
+
+            <tr>
+                <td>
+                    <label><b>Monsters</b></label>
+                </td>
+
+                <td>
+                    <input id="settings_numOfMonsters" class="inputField" type="number" min="1" max="3" name="settings_numOfMonsters">
+                </td>
+            </tr>
+
+
+
+        </table>
+
+        <table>
+            <tr>
+                <td><label><b>5 Points</b></label></td>
+                <td><input id="settings_5Points" class="inputField" type="color" value="#ff0000"></td>
+            </tr>
+
+            <tr>
+                <td><label><b>15 Points</b></label></td>
+                <td><input id="settings_15Points" class="inputField"  type="color" value="#ff0000"></td>
+            </tr>
+
+            <tr>
+                <td><label><b>25 Points</b></label></td>
+                <td><input id="settings_25Points" class="inputField" type="color" value="#ff0000"></td>
+            </tr>
+
+        </table>
+
+
+
+        <br>
+        <div class="center">
+            <button onclick="saveSettings()" style="width: 100%">Save changes</button>
+        </div>
+
+            <br>
+
+
+    </div>
 
 
 </div>
@@ -453,7 +453,7 @@
 
     <p class="tab"></p>
 
-<!--    <img src="images/thanos_glove.png" height="70" width="100">-->
+    <!--    <img src="images/thanos_glove.png" height="70" width="100">-->
 
 
     <canvas id="canvas" class="center" height="700px" width="700px"></canvas>
@@ -466,9 +466,16 @@
 
 
 <div id="game_over" class="hidden">
-    <img src="images/Marvel-Pacman-logo-bw.png" class="center" height="280" width="340">
+<!--    <img src="images/Marvel-Pacman-logo-bw.png" class="center" height="280" width="340">-->
     <!--    <img src="images/Marvel-Pacman%20logo.png" class="center">-->
 
+    <div id="thanos_lost" class="hidden">
+        <div class="tenor-gif-embed center" data-postid="13935027" data-share-method="host" data-width="30%" data-aspect-ratio="2.4174757281553396"><a href="https://tenor.com/view/thanos-reality-disappointing-truth-gif-13935027">Thanos Reality GIF</a> from <a href="https://tenor.com/search/thanos-gifs">Thanos GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    </div>
+
+    <div id="thanos_win" class="hidden">
+        <div class="tenor-gif-embed center" data-postid="11793362" data-share-method="host" data-width="20%" data-aspect-ratio="1.0"><a href="https://tenor.com/view/thanos-dancing-fortnite-orange-gif-11793362">Thanos Dancing GIF</a> from <a href="https://tenor.com/search/thanos-gifs">Thanos GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    </div>
 
     <br>
     <h1 class="center"> Game Over </h1>
