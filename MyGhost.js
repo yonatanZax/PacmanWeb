@@ -46,8 +46,7 @@ MyGhost = function (game, map, colour, pId) {
 
 
         /*    Draw as Image    */
-        const ghostImag = new Image();
-        ghostImag.src = 'images/groot_ghost.png';
+
 
         center.x = position.i * widthStep + widthStep / 2;
         center.y = position.j * heightStep + heightStep / 2;

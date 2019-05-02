@@ -34,7 +34,7 @@ var STATE,
 async function pause(){
     STATE = PAUSE;
     gameTime = time_elapsed;
-    clearIntervalsArr();
+    await clearIntervalsArr();
     myAudio.pause();
 }
 
@@ -47,8 +47,8 @@ function  play() {
     myAudio.play();
 }
 
-function ShowAlert(text){
-    pause();
+async function ShowAlert(text){
+    await pause();
     showPopup(text);
     // window.alert(text);
     // play();
@@ -59,7 +59,7 @@ function getTick(){
     return tick;
 }
 
-async function clearIntervalsArr(){
+function clearIntervalsArr(){
     intervalsArr.forEach(function(element){
         window.clearInterval(element);
     });
@@ -67,7 +67,6 @@ async function clearIntervalsArr(){
 }
 
 async function Start() {
-    myAudio = document.getElementById("myAudio");
     myAudio.currentTime = 0;
     score = 0;
     tick = 0;
@@ -87,7 +86,7 @@ async function Start() {
 
     keysDown = {};
     addEventListener("keydown", function (e) {
-        if (e.key === 'p') {
+        if (e.code === 'KeyP') {
             if (STATE === RUNNING)
                 pause();
             else
@@ -106,7 +105,7 @@ async function Start() {
 }
 
 function setCharactersLocations(){
-    var emptyCellPacman = board.findRandomEmptyCell();
+    var emptyCellPacman = board.findRandomCellForPacman();
     // board.board[emptyCellPacman[0]][emptyCellPacman[1]] = PACMAN;
     shape.i = emptyCellPacman[0];
     shape.j = emptyCellPacman[1];
@@ -180,8 +179,9 @@ function drawPacMan(context){
     context.beginPath();
 
     /*    Draw as Image    */
-    const pacImag = new Image();
+    var pacImag = new Image();
     pacImag.src = 'images/' + pacImgName + '_pacman_' + pacmanDirection + '.png';
+
     var xPos = center.x - widthStep / 2;
     var yPos = center.y - heightStep / 2;
     var imgWidth = widthStep;
@@ -283,18 +283,7 @@ function moveSpecialSnack(){
 
 // window.onload = function (event) {
 
-    function showPopup(text) {
-        var pText = document.getElementById("popup-text");
-        pText.innerHTML = text;
 
-        var modal = document.getElementById('myModal');
-
-        modal.style.display = "block";
-
-        pause();
-
-
-    }
 
 
 
@@ -363,9 +352,7 @@ function UpdatePosition() {
     if(testGhostHit()){
         lives--;
         if (lives === 0){
-            ShowAlert("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
             gameFinished("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
-            // Start();
         } else {
             ShowAlert("I guess this is not the reality you win.");
             score -= 10;
@@ -374,23 +361,33 @@ function UpdatePosition() {
     }
     if(isGameOver){
         // TODO set the game is done because all the pills have been eaten
-        ShowAlert("All Gems were consumed.");
-        setCharactersLocations();
+        gameFinished("All Gems were consumed.");
+
     }
     if (time_elapsed < 0){
         // TODO - do something about end of time
-        ShowAlert("Time has run out.");
         gameFinished("Time has run out.");
-        // Start();
     }
 
 }
 
+function showPopup(text) {
+    var pText = document.getElementById("popup-text");
+    pText.innerHTML = text;
+
+    var modal = document.getElementById('myModal');
+
+    modal.style.display = "block";
+
+    pause();
 
 
-function gameFinished(reason){
+}
+
+async function gameFinished(reason){
     // TODO - do what it say it suppose to do
-    showGameOver(reason)
+    await pause();
+    showGameOver(reason);
 
 }
 
