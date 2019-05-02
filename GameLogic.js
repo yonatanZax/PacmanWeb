@@ -352,21 +352,37 @@ function UpdatePosition() {
     if(testGhostHit()){
         lives--;
         if (lives === 0){
-            gameFinished("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
+            var msg = "Oh Snap.. You couldn't stop the Snap\n Half of the population has DISAPPEARED\n" +
+                "Your score is: " + score +'\n' +
+                'We have a winner!!';
+            gameFinished(msg);
         } else {
-            ShowAlert("I guess this is not the reality you win.");
+            ShowAlert("I guess this is not the reality you win.\nLets try a different one");
             score -= 10;
             setCharactersLocations();
         }
     }
     if(isGameOver){
         // TODO set the game is done because all the pills have been eaten
-        gameFinished("All Gems were consumed.");
+        var msg = "You have collected all the stones!\n" +
+            "Your score is: " + score +'\n' +
+            'We have a winner!!';
+        gameFinished(msg);
 
     }
     if (time_elapsed < 0){
         // TODO - do something about end of time
-        gameFinished("Time has run out.");
+        var msg;
+        if (score < 150){
+            msg = "Time has run out.\n" +
+                "Your score is: " + score +'\n' +
+                'You can do better!';
+        }else {
+            msg = "Time has run out.\n" +
+                "Your score is: " + score +'\n' +
+                'We have a winner!!';
+        }
+        gameFinished(msg);
     }
 
 }
