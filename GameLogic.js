@@ -23,6 +23,21 @@ var NONE        = 4,
 var  heightStep,
     widthStep  ;
 
+keysDown = {};
+addEventListener("keydown", function (e) {
+    if (e.code === 'KeyP') {
+        if (STATE === RUNNING)
+            pause();
+        else if(STATE === PAUSE)
+            play();
+    }
+    else if(STATE === RUNNING)
+        keysDown[e.key] = true;
+}, false);
+addEventListener("keyup", function (e) {
+    keysDown[e.key] = false;
+}, false);
+
 var pacmanDirection = 'right',
     gameTime;
 
@@ -34,7 +49,7 @@ var STATE,
 async function pause(){
     STATE = PAUSE;
     gameTime = time_elapsed;
-    clearIntervalsArr();
+    await clearIntervalsArr();
     myAudio.pause();
 }
 
@@ -47,8 +62,9 @@ function  play() {
     myAudio.play();
 }
 
-function ShowAlert(text){
-    pause();
+async function ShowAlert(text){
+    await pause();
+    STATE = WAITING;
     showPopup(text);
     // window.alert(text);
     // play();
@@ -59,7 +75,7 @@ function getTick(){
     return tick;
 }
 
-async function clearIntervalsArr(){
+function clearIntervalsArr(){
     intervalsArr.forEach(function(element){
         window.clearInterval(element);
     });
@@ -67,7 +83,6 @@ async function clearIntervalsArr(){
 }
 
 async function Start() {
-    myAudio = document.getElementById("myAudio");
     myAudio.currentTime = 0;
     score = 0;
     tick = 0;
@@ -85,20 +100,7 @@ async function Start() {
     specialSnack = SpecialSnack({"getTick":getTick}, board,'black', 3);
     setCharactersLocations();
 
-    keysDown = {};
-    addEventListener("keydown", function (e) {
-        if (e.key === 'p') {
-            if (STATE === RUNNING)
-                pause();
-            else
-                play();
-        }
-        else if(STATE === RUNNING)
-            keysDown[e.key] = true;
-    }, false);
-    addEventListener("keyup", function (e) {
-        keysDown[e.key] = false;
-    }, false);
+
 
     // interval = setInterval(UpdatePosition, 250);
     await clearIntervalsArr();
@@ -106,7 +108,7 @@ async function Start() {
 }
 
 function setCharactersLocations(){
-    var emptyCellPacman = board.findRandomEmptyCell();
+    var emptyCellPacman = board.findRandomCellForPacman();
     // board.board[emptyCellPacman[0]][emptyCellPacman[1]] = PACMAN;
     shape.i = emptyCellPacman[0];
     shape.j = emptyCellPacman[1];
@@ -284,18 +286,7 @@ function moveSpecialSnack(){
 
 // window.onload = function (event) {
 
-    function showPopup(text) {
-        var pText = document.getElementById("popup-text");
-        pText.innerHTML = text;
 
-        var modal = document.getElementById('myModal');
-
-        modal.style.display = "block";
-
-        pause();
-
-
-    }
 
 
 
@@ -364,32 +355,70 @@ function UpdatePosition() {
     if(testGhostHit()){
         lives--;
         if (lives === 0){
-            // ShowAlert("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
-            gameFinished("Oh Snap.. You couldn't stop the Snap\n Everyone is DEAD");
-            // Start();
+            var msg = "Oh Snap.. You couldn't stop the Snap\n Half of the population has DISAPPEARED\n" +
+                "Your score is: " + score +'\n' +
+                'You Lost!' ;
+            gameFinished(msg, false);
         } else {
-            ShowAlert("I guess this is not the reality you win.");
+            ShowAlert("I guess this is not the reality you win.\nLets try a different one");
             score -= 10;
             setCharactersLocations();
         }
     }
     if(isGameOver){
         // TODO set the game is done because all the pills have been eaten
-        gameFinished("All Gems were consumed.");
+        var msg = "You have collected all the stones!\n" +
+            "Your score is: " + score + '\n' +
+            'We have a winner!!';
+        gameFinished(msg, true);
 
     }
     if (time_elapsed < 0){
         // TODO - do something about end of time
-        gameFinished("Time has run out.");
+        var msg;
+        if (score < 150){
+            msg = "Time has run out.\n" +
+                "Your score is: " + score +'\n' +
+                'You can do better!';
+            gameFinished(msg, false);
+        }else {
+            msg = "Time has run out.\n" +
+                "Your score is: " + score +'\n' +
+                'We have a winner!!';
+            gameFinished(msg, true);
+        }
     }
 
 }
 
+function showPopup(text) {
+    var pText = document.getElementById("popup-text");
+    pText.innerHTML = text;
+
+    var modal = document.getElementById('myModal');
+
+    modal.style.display = "block";
+
+    // pause();
 
 
-function gameFinished(reason){
+}
+
+async function gameFinished(reason, win_lost){
     // TODO - do what it say it suppose to do
-    showGameOver(reason)
+    await pause();
+    if(win_lost === true){
+        var winGif = document.getElementById("thanos_win");
+        winGif.className = 'visible';
+        var lostGif = document.getElementById("thanos_lost");
+        lostGif.className = 'hidden';
+    }else{
+        var winGif = document.getElementById("thanos_win");
+        winGif.className = 'hidden';
+        var lostGif = document.getElementById("thanos_lost");
+        lostGif.className = 'visible';
+    }
+    showGameOver(reason);
 
 }
 

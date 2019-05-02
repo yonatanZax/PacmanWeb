@@ -80,11 +80,22 @@ Board = function() {
     function findRandomEmptyCell() {
         var i = Math.floor((Math.random() * board.length));
         var j = Math.floor((Math.random() * board[0].length) );
-        while (board[i][j] !== EMPTY || (j === 10 && (i >= 8 || i <= 10)) || (j === 9 && i === 9)) {
+        while (board[i][j] !== EMPTY) {
             i = Math.floor((Math.random() * board.length));
             j = Math.floor((Math.random() * board[0].length) );
         }
         return [i, j];
+    }
+
+    function findRandomCellForPacman() {
+        var i = 4 +  Math.floor((Math.random() * (board.length - 8)));
+        var j = 4 +  Math.floor((Math.random() * (board[0].length - 8)));
+        while (board[i][j] !== EMPTY) {
+            i = 4 +  Math.floor((Math.random() * (board.length - 8)));
+            j = 4 +  Math.floor((Math.random() * (board[0].length - 8)));
+        }
+        return [i, j];
+
     }
 
     function getBoard(){
@@ -220,7 +231,8 @@ Board = function() {
         'boardAt'               : boardAt,
         'getPossibleMoves'      : getPossibleMoves,
         'draw'                  : draw,
-        'setEmpty'               : setEmpty,
+        'setEmpty'              : setEmpty,
+        'findRandomCellForPacman' : findRandomCellForPacman,
     };
 
 };
